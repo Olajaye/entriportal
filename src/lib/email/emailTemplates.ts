@@ -55,12 +55,12 @@ export const tenantAdminTemplate = ({
 
 export const passwordResetTemplate = ({
   name,
-  resetUrl,
+  resetCode,
   supportEmail,
   expiryTime,
 }: {
   name: string;
-  resetUrl: string;
+  resetCode: string;
   supportEmail: string;
   expiryTime: string;
 }) => `<!DOCTYPE html>
@@ -96,10 +96,10 @@ export const passwordResetTemplate = ({
                 </p>
                 <div style="margin: 30px 0; text-align: center;">
                   <a
-                    href="${resetUrl}"
+                    href="#"
                     style="background-color: #f59e0b; color: #fff; padding: 14px 24px; border-radius: 6px; text-decoration: none; font-weight: 600; display: inline-block;"
                   >
-                    Reset Password
+                   ${resetCode}
                   </a>
                 </div>
                 <p style="color: #6b7280;">
