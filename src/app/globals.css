@@ -1,0 +1,204 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* NeuroBytes Brand Colors */
+    --electric-blue: 211 100% 50%;        /* #007BFF */
+    --dark-gray: 0 0% 12%;                /* #1E1E1E */
+    --pure-white: 0 0% 100%;              /* #FFFFFF */
+    --light-gray: 0 0% 96%;               /* #F4F4F4 */
+    
+    /* Design System Colors */
+    --background: var(--pure-white);
+    --foreground: var(--dark-gray);
+    
+    --hero-background: var(--dark-gray);
+    --hero-foreground: var(--pure-white);
+    
+    --card: var(--pure-white);
+    --card-foreground: var(--dark-gray);
+    --card-border: 0 0% 90%;
+    
+    --section-background: var(--light-gray);
+    --section-foreground: var(--dark-gray);
+    
+    --primary: var(--electric-blue);
+    --primary-foreground: var(--pure-white);
+    
+    --secondary: var(--dark-gray);
+    --secondary-foreground: var(--pure-white);
+    
+    --muted: var(--light-gray);
+    --muted-foreground: 0 0% 45%;
+    
+    --accent: var(--electric-blue);
+    --accent-foreground: var(--pure-white);
+    
+    --border: var(--card-border);
+    --input: var(--card-border);
+    --ring: var(--electric-blue);
+    
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(var(--dark-gray)), hsl(0 0% 8%));
+    --gradient-electric: linear-gradient(135deg, hsl(var(--electric-blue)), hsl(220 100% 45%));
+    --gradient-card: linear-gradient(180deg, hsl(var(--pure-white)), hsl(0 0% 98%));
+    
+    /* Shadows */
+    --shadow-card: 0 4px 6px -1px hsl(0 0% 0% / 0.1), 0 2px 4px -1px hsl(0 0% 0% / 0.06);
+    --shadow-hover: 0 10px 25px -3px hsl(0 0% 0% / 0.1), 0 4px 6px -2px hsl(0 0% 0% / 0.05);
+    --shadow-glow: 0 0 40px hsl(var(--electric-blue) / 0.2);
+    
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    
+    --radius: 0.75rem;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+  
+  /* Custom utility classes */
+  .gradient-hero {
+    background: var(--gradient-hero);
+  }
+  
+  .gradient-electric {
+    background: var(--gradient-electric);
+  }
+  
+  .gradient-card {
+    background: var(--gradient-card);
+  }
+  
+  .shadow-card {
+    box-shadow: var(--shadow-card);
+  }
+  
+  .shadow-hover {
+    box-shadow: var(--shadow-hover);
+  }
+  
+  .shadow-glow {
+    box-shadow: var(--shadow-glow);
+  }
+  
+  .transition-smooth {
+    transition: var(--transition-smooth);
+  }
+  
+  .transition-bounce {
+    transition: var(--transition-bounce);
+  }
+}
+
+@layer components {
+  /* Hero section styling */
+  .hero-section {
+    @apply min-h-screen gradient-hero text-white flex items-center;
+  }
+  
+  /* Section styling */
+  .content-section {
+    @apply py-20 px-6;
+  }
+  
+  .section-container {
+    @apply max-w-7xl mx-auto;
+  }
+  
+  /* Card styling */
+  .feature-card {
+    @apply bg-card border border-border rounded-xl p-8 shadow-card transition-smooth hover:shadow-hover;
+  }
+  
+  .module-card {
+    @apply feature-card cursor-pointer;
+  }
+  
+  /* Typography */
+  .hero-title {
+    @apply text-5xl md:text-6xl lg:text-7xl font-bold leading-tight;
+  }
+  
+  .hero-subtitle {
+    @apply text-xl md:text-2xl text-gray-300 leading-relaxed;
+  }
+  
+  .section-title {
+    @apply text-4xl md:text-5xl font-bold text-center mb-6;
+  }
+  
+  .section-subtitle {
+    @apply text-lg md:text-xl text-muted-foreground text-center mb-16 max-w-3xl mx-auto;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}

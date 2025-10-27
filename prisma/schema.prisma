@@ -1,0 +1,109 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                String            @id @default(uuid())
+  email             String            @unique
+  name              String
+  phone             String
+  password          String
+  temporaryPassword Boolean           @default(true)
+  status            TenantAdminStatus @default(ACTIVE)
+  unitNumber        String?
+  userType          UserType
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+  resetToken        String?
+  resetTokenExpiry  DateTime?
+  estateId          String
+  estate            Estate            @relation(fields: [estateId], references: [id])
+  accessCodes       AccessCode[]      @relation("UserAccessCodes")
+
+  PasswordResetAttempt PasswordResetAttempt[]
+}
+
+enum UserType {
+  TENANTADMIN
+  RESIDENT
+  GUARD
+}
+
+enum EstatePlan {
+  ANNUAL
+  BASIC
+  MEDIUM
+}
+
+model Estate {
+  id                    String        @id @default(uuid())
+  estateName            String        @unique
+  paymentReference      String?       @unique
+  user                  User[]
+  tenantAdminId         String
+  slug                  String        @unique
+  isPaymentVerified     Boolean       @default(false)
+  paymentVerifiedAt     DateTime?
+  estateAddress         EstateAddress @relation(fields: [estateAddressId], references: [id])
+  estateAddressId       Int
+  subscriptionStartDate DateTime?
+  subscriptionEndDate   DateTime?
+  paymentStatus         String        @default("PENDING")
+  estatePlan            EstatePlan    @default(BASIC)
+  createdAt             DateTime      @default(now())
+  updatedAt             DateTime      @updatedAt
+}
+
+model EstateAddress {
+  id         Int      @id @default(autoincrement())
+  streetName String
+  city       String
+  state      String
+  zipCode    String
+  country    String
+  Estate     Estate[]
+}
+
+enum TenantAdminStatus {
+  ACTIVE
+  INACTIVE
+}
+
+model AccessCode {
+  id         String           @id @default(uuid())
+  code       String           @unique
+  guestName  String
+  residentId String
+  estateId   String
+  status     AccessCodeStatus
+  createdAt  DateTime         @default(now())
+  expiresAt  DateTime
+  usedAt     DateTime?
+  userId     String
+  user       User             @relation("UserAccessCodes", fields: [userId], references: [id], onDelete: Cascade)
+}
+
+enum AccessCodeStatus {
+  ACTIVE
+  USED
+  EXPIRED
+}
+
+model PasswordResetAttempt {
+  id          String   @id @default(uuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  email       String
+  attemptedAt DateTime @default(now())
+}

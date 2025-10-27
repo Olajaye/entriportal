@@ -1,0 +1,21 @@
+{
+  "name": "Entri",
+  "short_name": "Entri",
+  "description": "Secure access code management for residential buildings",
+  "start_url": "/entri",
+  "scope": "/entri",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#D97757",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/image/logoDark.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["business", "productivity"],
+  "lang": "en-US"
+}
