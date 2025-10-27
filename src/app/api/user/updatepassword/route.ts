@@ -1,5 +1,5 @@
 import { prisma } from "@/src/lib/prisma";
-import { compare } from "bcrypt";
+import { compare } from "bcryptjs";
 import bcrypt from "bcryptjs";
 import { NextRequest, NextResponse } from "next/server";
 
