@@ -80,7 +80,7 @@ export async function POST(request: NextRequest) {
           resetTokenExpiry: null,
         },
       }),
-      // Store new reset code
+
       prisma.user.update({
         where: { id: user.id },
         data: {
