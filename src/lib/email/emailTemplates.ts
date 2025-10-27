@@ -64,65 +64,135 @@ export const passwordResetTemplate = ({
   supportEmail: string;
   expiryTime: string;
 }) => `<!DOCTYPE html>
-<html lang="en" style="font-family: Arial, sans-serif;">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reset Your Password</title>
-  </head>
-  <body style="margin: 0; padding: 0; background-color: #f9fafb;">
-    <table
-      role="presentation"
-      border="0"
-      cellpadding="0"
-      cellspacing="0"
-      width="100%"
-    >
-      <tr>
-        <td align="center" style="padding: 40px 0;">
-          <table
-            role="presentation"
-            border="0"
-            cellpadding="0"
-            cellspacing="0"
-            width="100%"
-            style="max-width: 600px; background-color: #ffffff; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);"
-          >
-            <tr>
-              <td style="padding: 40px 40px 20px 40px;">
-                <h2 style="margin: 0; color: #111827;">Hi ${name},</h2>
-                <p style="margin: 16px 0; color: #4b5563;">
-                  You requested to reset your password. Click the button below to proceed:
-                </p>
-                <div style="margin: 30px 0; text-align: center;">
-                  <a
-                    href="#"
-                    style="background-color: #f59e0b; color: #fff; padding: 14px 24px; border-radius: 6px; text-decoration: none; font-weight: 600; display: inline-block;"
-                  >
-                   ${resetCode}
-                  </a>
-                </div>
-                <p style="color: #6b7280;">
-                  This link will expire in <strong>${expiryTime}</strong>. If you didn’t request a password reset, you can ignore this email.
-                </p>
-                <p style="color: #6b7280; margin-top: 24px;">
-                  If you have any questions, contact us at
-                  <a href="mailto: ${supportEmail}" style="color: #f59e0b;">${supportEmail}</a>.
-                </p>
-              </td>
-            </tr>
-            <tr>
-              <td style="padding: 20px 40px; text-align: center; font-size: 12px; color: #9ca3af;">
-                &copy; 2025 entri. All rights reserved.
-              </td>
-            </tr>
-          </table>
-        </td>
-      </tr>
+    <style>
+        @media only screen and (max-width: 600px) {
+            .container {
+                width: 100% !important;
+                border-radius: 0 !important;
+            }
+            .content {
+                padding: 20px !important;
+            }
+            .code-container {
+                padding: 15px !important;
+            }
+            .code {
+                font-size: 32px !important;
+                letter-spacing: 8px !important;
+                padding: 20px 10px !important;
+            }
+        }
+    </style>
+</head>
+<body style="margin: 0; padding: 0; background-color: #f8fafc; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;">
+    <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #f8fafc;">
+        <tr>
+            <td align="center" style="padding: 40px 20px;">
+                <!-- Logo/Brand Header -->
+                <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px; margin-bottom: 20px;">
+                    <tr>
+                        <td align="center">
+                            <div style="font-size: 24px; font-weight: bold; color: #f59e0b;">ENTRI</div>
+                        </td>
+                    </tr>
+                </table>
+
+                <!-- Main Content Card -->
+                <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px; background: #ffffff; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); overflow: hidden;">
+                    <!-- Header -->
+                    <tr>
+                        <td style="background: linear-gradient(135deg, #f59e0b, #d97706); padding: 40px 40px 30px 40px; text-align: center;">
+                            <h1 style="margin: 0; color: white; font-size: 28px; font-weight: 600;">Password Reset</h1>
+                            <p style="margin: 8px 0 0 0; color: rgba(255, 255, 255, 0.9); font-size: 16px;">Secure your account</p>
+                        </td>
+                    </tr>
+
+                    <!-- Content -->
+                    <tr>
+                        <td class="content" style="padding: 40px;">
+                            <!-- Greeting -->
+                            <p style="margin: 0 0 20px 0; color: #374151; font-size: 16px; line-height: 1.6;">
+                                Hello <strong>${name}</strong>,
+                            </p>
+                            
+                            <p style="margin: 0 0 24px 0; color: #6b7280; font-size: 16px; line-height: 1.6;">
+                                You requested to reset your password. Use the verification code below to proceed:
+                            </p>
+
+                            <!-- Reset Code -->
+                            <div style="text-align: center; margin: 32px 0;">
+                                <div class="code-container" style="background: #fef3c7; border: 2px dashed #f59e0b; border-radius: 12px; padding: 20px; display: inline-block;">
+                                    <div class="code" style="font-family: 'Courier New', monospace; font-size: 40px; font-weight: 700; color: #92400e; letter-spacing: 12px; padding: 10px 20px; background: #fef3c7; border-radius: 8px;">
+                                        ${resetCode}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Instructions -->
+                            <div style="background: #f9fafb; border-radius: 8px; padding: 20px; margin: 24px 0;">
+                                <h3 style="margin: 0 0 12px 0; color: #374151; font-size: 16px; font-weight: 600;">📝 Instructions:</h3>
+                                <ol style="margin: 0; padding-left: 20px; color: #6b7280; font-size: 14px; line-height: 1.6;">
+                                    <li>Enter this code in the password reset form</li>
+                                    <li>Create your new password</li>
+                                    <li>Sign in with your new credentials</li>
+                                </ol>
+                            </div>
+
+                            <!-- Expiry Warning -->
+                            <div style="background: #fef2f2; border-left: 4px solid #dc2626; border-radius: 4px; padding: 16px; margin: 24px 0;">
+                                <p style="margin: 0; color: #dc2626; font-size: 14px; font-weight: 500;">
+                                    ⚠️ This code will expire in <strong>${expiryTime}</strong>
+                                </p>
+                            </div>
+
+                            <!-- Security Note -->
+                            <div style="border-top: 1px solid #e5e7eb; padding-top: 24px; margin-top: 24px;">
+                                <p style="margin: 0 0 12px 0; color: #6b7280; font-size: 14px;">
+                                    <strong>Security Tip:</strong> Never share this code with anyone. Our team will never ask for your verification code.
+                                </p>
+                                <p style="margin: 0; color: #6b7280; font-size: 14px;">
+                                    If you didn't request this reset, please ignore this email or contact support if you're concerned about your account's security.
+                                </p>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+
+                <!-- Support Section -->
+                <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px; margin-top: 20px;">
+                    <tr>
+                        <td align="center" style="padding: 20px;">
+                            <p style="margin: 0 0 8px 0; color: #6b7280; font-size: 14px;">
+                                Need help? Contact our support team
+                            </p>
+                            <a href="mailto:${supportEmail}" style="color: #f59e0b; text-decoration: none; font-weight: 500; font-size: 14px;">
+                                ${supportEmail}
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+
+                <!-- Footer -->
+                <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px; margin-top: 20px;">
+                    <tr>
+                        <td align="center" style="padding: 20px;">
+                            <p style="margin: 0; color: #9ca3af; font-size: 12px; line-height: 1.5;">
+                                &copy; 2024 Entri. All rights reserved.<br>
+                                This email was sent to you as part of our account security services.
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
     </table>
-  </body>
-</html>
-`;
+</body>
+</html>`;
 
 export const subscriptionReminderTemplate = ({
   estateName,

@@ -104,6 +104,7 @@ export async function POST(request: NextRequest) {
       expiryTime: "15 minutes",
       supportEmail: "support@yourapp.com",
     };
+    console.log("Password reset code generated:", emailData);
 
     // Send reset email
     try {
