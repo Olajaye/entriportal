@@ -20,10 +20,38 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Logo from "@/src/component/Logo";
 
+const roles: RoleOption[] = [
+  {
+    type: "admin",
+    icon: UserCog,
+    title: "Estate Admin",
+    description: "Manage residents, guards, and estate operations",
+  },
+  {
+    type: "resident",
+    icon: Users,
+    title: "Resident",
+    description: "Generate access codes and manage visitors",
+  },
+  {
+    type: "guard",
+    icon: Shield,
+    title: "Security Guard",
+    description: "Validate access codes and monitor security",
+  },
+];
+
+type UserType = "admin" | "resident" | "guard";
+
+interface RoleOption {
+  type: UserType;
+  icon: React.ElementType;
+  title: string;
+  description: string;
+}
+
 const Page = () => {
-  const [userType, setUserType] = useState<
-    "admin" | "resident" | "guard" | null
-  >(null);
+  const [userType, setUserType] = useState<UserType | null>(null);
   const [estateName, setEstateName] = useState("");
   const [estates, setEstates] = useState<Estate[]>([]);
   const [selectedEstate, setSelectedEstate] = useState<Estate | null>(null);
@@ -116,7 +144,7 @@ const Page = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-offWhite via-background to-lightGray flex items-center justify-center p-4 mobile-scroll">
-      <div className="w-full max-w-md space-y-4 md:space-y-6">
+      <div className="w-full max-w-lg space-y-4 md:space-y-6">
         {/* Header */}
         <div className="text-center space-y-2">
           <Logo />
@@ -139,60 +167,45 @@ const Page = () => {
                 Select your role to continue
               </CardDescription>
             </CardHeader>
-            <CardContent className="space-y-4">
-              <Button
-                variant="outline"
-                className="w-full h-auto p-2 md:p-3 text-left tap-target"
-                onClick={() => setUserType("admin")}
-              >
-                <div className="flex flex-wrap items-center space-x-3">
-                  <UserCog className="h-7 w-7 md:h-10 md:w-10 flex-shrink-0 text-primaryCol" />
-                  <div className="flex-1 min-w-0">
-                    <div className="text-sm md:text-base font-inter text-charcoal">
-                      Estate Admin
-                    </div>
-                    <div className="text-xs md:text-sm text-muted-foreground break-words text-slateGray">
-                      Manage residents, guards, and estate operations
-                    </div>
-                  </div>
-                </div>
-              </Button>
-
-              <Button
-                variant="outline"
-                className="w-full h-auto p-2 md:p-3 text-left tap-target"
-                onClick={() => setUserType("resident")}
-              >
-                <div className="flex items-center space-x-3">
-                  <Users className="h-7 w-7 md:h-10 md:w-10  flex-shrink-0 text-primaryCol" />
-                  <div className="flex-1 min-w-0">
-                    <div className="text-sm md:text-base font-inter text-charcoal">
-                      Resident
-                    </div>
-                    <div className="text-xs md:text-sm text-muted-foreground break-words">
-                      Generate access codes and manage visitors
-                    </div>
-                  </div>
-                </div>
-              </Button>
-
-              <Button
-                variant="outline"
-                className="w-full h-auto p-2 md:p-3 text-left tap-target"
-                onClick={() => setUserType("guard")}
-              >
-                <div className="flex items-center space-x-3">
-                  <Shield className="h-7 w-7 md:h-10 md:w-10  flex-shrink-0 text-primaryCol" />
-                  <div className="flex-1 min-w-0">
-                    <div className="text-sm md:text-base font-inter text-charcoal">
-                      Security Guard
-                    </div>
-                    <div className="text-xs md:text-sm text-muted-foreground break-words">
-                      Validate access codes and monitor security
+            <CardContent className="space-y-3 sm:space-y-4 md:space-y-5 lg:space-y-6">
+              {roles.map(({ type, icon: Icon, title, description }) => (
+                <Button
+                  key={type}
+                  variant="outline"
+                  className="
+                    w-full h-auto p-2 sm:p-3 md:p-4 lg:p-5 
+                    text-left tap-target rounded-xl 
+                    hover:bg-gray-50 transition-colors duration-200
+                  "
+                  onClick={() => setUserType(type)}
+                >
+                  <div className="flex items-center space-x-2 sm:space-x-3">
+                    <Icon className="h-5 w-5 sm:h-7 sm:w-7 md:h-9 md:w-9 lg:h-16 lg:w-16  text-primaryCol" />
+                    <div className="flex-1 min-w-0 space-y-1 overflow-hidden">
+                      <div
+                        className="
+                            text-sm sm:text-base md:text-lg lg:text-xl 
+                            font-inter font-medium text-charcoal 
+                            truncate
+                          "
+                        title={title}
+                      >
+                        {title}
+                      </div>
+                      <div
+                        className="hidden sm:block
+                          text-xs sm:text-sm md:text-base 
+                          text-muted-foreground text-slateGray 
+                          leading-relaxed line-clamp-2 overflow-hidden text-ellipsis
+                        "
+                        title={description}
+                      >
+                        {description}
+                      </div>
                     </div>
                   </div>
-                </div>
-              </Button>
+                </Button>
+              ))}
             </CardContent>
           </Card>
         )}

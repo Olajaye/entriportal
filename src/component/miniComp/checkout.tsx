@@ -145,11 +145,11 @@ const CheckoutPopup: React.FC<CheckoutPopupProps> = ({
               <InfoField label="Full Name" value={data.tenant.name} />
               <InfoField label="Email" value={data.tenant.email} type="email" />
               <InfoField label="Phone" value={data.tenant.phone} type="phone" />
-              <InfoField
+              {/* <InfoField
                 label="Estate ID"
                 value={`${data.tenant.id.slice(0, 10)}...`}
                 type="code"
-              />
+              /> */}
             </div>
 
             {/* Payment & Subscription Details */}
@@ -252,12 +252,12 @@ const CheckoutPopup: React.FC<CheckoutPopupProps> = ({
                         </li>
                         <li>
                           Keep your reference number for future inquiries:{" "}
-                          <strong>{data.payment.reference.slice(0, 10)}</strong>
+                          <strong>{data.payment.reference.slice(0, 20)}</strong>
                         </li>
-                        <li>
+                        {/* <li>
                           You can verify your payment status using:{" "}
-                          <strong>{data.verify_url.slice(0, 10)}</strong>
-                        </li>
+                          <strong>{data.verify_url.slice(0, 30)}</strong>
+                        </li> */}
                       </ul>
                     </div>
                   </div>
@@ -282,7 +282,6 @@ const CheckoutPopup: React.FC<CheckoutPopupProps> = ({
               </button>
               <Link
                 href={data.payment.authorization_url}
-                // target="_blank"
                 rel="noopener noreferrer"
                 className="px-8 hidden sm:block py-2 bg-gradient-to-r from-[#D97757] to-[#D97757] text-white font-medium rounded-lg hover:from-[#D97757] hover:to-[#D97757] transition-all transform hover:scale-105 shadow-lg"
               >
@@ -290,7 +289,6 @@ const CheckoutPopup: React.FC<CheckoutPopupProps> = ({
               </Link>
               <Link
                 href={data.payment.authorization_url}
-                // target="_blank"
                 rel="noopener noreferrer"
                 className="px-8 sm:hidden  py-2 bg-gradient-to-r from-[#D97757] to-[#D97757] text-white font-medium rounded-lg hover:from-[#D97757] hover:to-[#D97757] transition-all transform hover:scale-105 shadow-lg"
               >
