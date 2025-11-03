@@ -10,7 +10,7 @@ import { Button } from "@/src/component/ui/button";
 import { Input } from "@/src/component/ui/input";
 import { Label } from "@/src/component/ui/label";
 
-import { Shield, Home, Loader2 } from "lucide-react";
+import { Shield, Home, Loader2, EyeOff, Eye, ArrowLeft } from "lucide-react";
 import PasswordChangeModal from "@/src/component/model/PasswordChangeModal";
 import toast from "react-hot-toast";
 import { useParams, useRouter } from "next/navigation";
@@ -33,6 +33,7 @@ const LoginPortal = ({ type }: PortalLoginProps) => {
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [showPasswordChange, setShowPasswordChange] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const { estateName } = useParams<{ estateName: string }>();
   const slug = estateName;
   const [estate, setEstate] = useState<Estate>({} as Estate);
@@ -120,6 +121,26 @@ const LoginPortal = ({ type }: PortalLoginProps) => {
 
   // Show loading state while tenant is being fetched
 
+  const togglePasswordVisibility = () => {
+    setShowPassword((prev) => !prev);
+  };
+
+  const renderPasswordVisibilityToggle = () => (
+    <Button
+      type="button"
+      variant="ghost"
+      size="sm"
+      className="absolute right-0 top-0 h-full px-3 py-2 "
+      onClick={togglePasswordVisibility}
+    >
+      {showPassword ? (
+        <EyeOff className="h-4 w-4" />
+      ) : (
+        <Eye className="h-4 w-4" />
+      )}
+    </Button>
+  );
+
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-offWhite via-background to-lightGray">
@@ -188,15 +209,18 @@ const LoginPortal = ({ type }: PortalLoginProps) => {
             </div>
             <div className="space-y-2">
               <Label htmlFor="password">Password</Label>
-              <Input
-                id="password"
-                type="password"
-                placeholder="Enter your password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                className="w-full"
-              />
+              <div className="relative w-full">
+                <Input
+                  id="password"
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Enter your password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                  className="w-full"
+                />
+                {renderPasswordVisibilityToggle()}
+              </div>
             </div>
             <div className="flex justify-end items-end">
               <Link href={"/forgetPassword"} className="text-navy font-inter">
@@ -213,6 +237,16 @@ const LoginPortal = ({ type }: PortalLoginProps) => {
                 "Sign In"
               )}
             </Button>
+            {/* <div className="text-center pt-2">
+              <Button
+                variant="ghost"
+                onClick={() => router.push("/entri")}
+                className="text-sm"
+              >
+                <ArrowLeft className="mr-2 h-4 w-4" />
+                Back to Main Portal
+              </Button>
+            </div> */}
           </form>
 
           <div className="mt-6 text-center">

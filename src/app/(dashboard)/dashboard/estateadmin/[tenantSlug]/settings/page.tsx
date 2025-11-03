@@ -130,19 +130,15 @@ const EstateSettings = () => {
 
   return (
     <>
-      <div className="space-y-6">
-        <div className="flex items-center justify-between">
-          <div>
-            <h1 className="text-3xl font-bold">Estate Settings</h1>
+      <div className="">
+        <div className="sm:flex mb-5 items-center justify-between">
+          <div className="">
+            <h1 className="text-xl lg:text-3xl font-bold">Estate Settings</h1>
             <p className="text-muted-foreground">
               Manage your estate configuration and information
             </p>
           </div>
-          <div className="flex items-center gap-4">
-            {/* <Button variant="default" size="sm">
-              Edit Settings
-            </Button> */}
-
+          <div className="flex items-center mt-5 sm:mt-0 gap-4">
             <Dialog open={open} onOpenChange={setOpen}>
               <DialogTrigger asChild>
                 <Button>
@@ -257,8 +253,7 @@ const EstateSettings = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {/* Estate Information */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-0 md:mt-5">
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
@@ -302,7 +297,6 @@ const EstateSettings = () => {
             </CardContent>
           </Card>
 
-          {/* Access URL */}
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
@@ -350,8 +344,6 @@ const EstateSettings = () => {
               </div>
             </CardContent>
           </Card>
-
-          {/* Estate Address (if available) */}
 
           {estate?.estateAddress && (
             <Card className="lg:col-span-2">

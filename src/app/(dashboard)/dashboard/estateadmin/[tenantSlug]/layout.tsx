@@ -15,6 +15,8 @@ import {
   Settings,
   LayoutDashboard,
   User,
+  Menu,
+  X,
 } from "lucide-react";
 // import MobileLayout from "@/components/mobile/MobileLayout";
 import { Metadata } from "next";
@@ -37,6 +39,7 @@ interface TenantLayoutProps {
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { user } = useSelector((s: RootState) => s.user);
   const { tenantSlug } = useParams<{ tenantSlug: string }>(); //tenantSlug
   const slug = tenantSlug;
@@ -138,17 +141,20 @@ export default function RootLayout({
               </h1>
             </div>
 
-            <Badge variant={user.status === "ACTIVE" ? "default" : "secondary"}>
-              {user.status === "ACTIVE" ? "Active" : "Inactive"}
-            </Badge>
-            <p className="text-sm font-medium">
+            <div className="hidden md:block">
+              <Badge
+                variant={user.status === "ACTIVE" ? "default" : "secondary"}
+              >
+                {user.status === "ACTIVE" ? "Active" : "Inactive"}
+              </Badge>
+            </div>
+            <p className="text-sm font-medium hidden md:block">
               Estate Plan {estate.estatePlan}
             </p>
           </div>
 
           <div className="flex items-center space-x-4">
             <div className="text-right hidden sm:block">
-              {/* {profile?.full_name} */}
               <p className="text-sm font-medium">{user.name}</p>
               <p className="text-xs text-muted-foreground capitalize">
                 {user.userType.replace("_", " ").toLowerCase()}
@@ -171,9 +177,9 @@ export default function RootLayout({
         </div>
       </header>
 
-      <div className="flex flex-1 overflow-hidden">
-        {/* Sidebar */}
-        <aside className="w-64 border-r bg-card flex-shrink-0">
+      <div className="flex flex-col md:flex-row flex-1 overflow-hidden">
+        {/* Sidebar - Hidden on mobile, shown as drawer */}
+        <aside className="hidden md:block w-64 border-r bg-card flex-shrink-0">
           <nav className="p-4 space-y-2">
             {menuItems.map((item) => {
               const Icon = item.icon;
@@ -193,8 +199,58 @@ export default function RootLayout({
           </nav>
         </aside>
 
+        {/* Mobile Header with Menu Button */}
+        <div className="md:hidden border-b bg-card p-4 flex items-center justify-between">
+          <h1 className="text-lg font-semibold">Menu</h1>
+          <Button
+            variant="outline"
+            size="icon"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          >
+            <Menu className="h-4 w-4" />
+          </Button>
+        </div>
+
+        {/* Mobile Menu Overlay */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden fixed inset-0 z-50 bg-background/80 backdrop-blur-sm">
+            <div className="fixed inset-y-0 left-0 w-64 bg-card border-r animate-in slide-in-from-left duration-300">
+              <div className="p-4 border-b flex items-center justify-between">
+                <h2 className="text-lg font-semibold">Navigation</h2>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  <X className="h-4 w-4" />
+                </Button>
+              </div>
+              <nav className="p-4 space-y-2">
+                {menuItems.map((item) => {
+                  const Icon = item.icon;
+                  const isActive = pathname === item.path;
+                  return (
+                    <Button
+                      key={item.path}
+                      variant={isActive ? "default" : "ghost"}
+                      className="w-full justify-start"
+                      onClick={() => {
+                        route.push(item.path);
+                        setIsMobileMenuOpen(false);
+                      }}
+                    >
+                      <Icon className="h-4 w-4 mr-2" />
+                      {item.label}
+                    </Button>
+                  );
+                })}
+              </nav>
+            </div>
+          </div>
+        )}
+
         {/* Main Content - Scrollable Area */}
-        <main className="flex-1 p-6 overflow-auto">{children}</main>
+        <main className="flex-1 p-4 md:p-6 overflow-auto">{children}</main>
       </div>
 
       <UserSettingsModal

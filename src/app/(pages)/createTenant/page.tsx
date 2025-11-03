@@ -11,7 +11,6 @@ import { CheckoutData, TenantCreationResponse } from "@/src/type";
 export default function CreateTenantPage() {
   const searchParams = useSearchParams();
   const plan = searchParams.get("plan");
-  console.log(plan);
   const [showCheckout, setShowCheckout] = useState(false);
   const [checkoutData, setCheckoutData] = useState<TenantCreationResponse>(
     {} as TenantCreationResponse
@@ -72,7 +71,6 @@ export default function CreateTenantPage() {
     createTenantAdmin(payload)
       .unwrap()
       .then((res) => {
-        console.log(res);
         setCheckoutData(res.data);
         setShowCheckout(true);
         setIsSubmitting(false);

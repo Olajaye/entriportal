@@ -32,6 +32,9 @@ import {
   Clock,
   CheckCircle,
   AlertTriangle,
+  UserPlus,
+  Phone,
+  Mail,
 } from "lucide-react";
 import { Button } from "@/src/component/ui/button";
 import { Input } from "@/src/component/ui/input";
@@ -208,10 +211,12 @@ const GuardManagement = () => {
 
   return (
     <>
-      <div className="space-y-6">
-        <div className="flex items-center justify-between">
-          <div>
-            <h1 className="text-3xl font-bold">Security Guard Management</h1>
+      <div className="">
+        <div className="sm:flex items-center justify-between mb-4">
+          <div className="mb-5 sm:mb-0">
+            <h1 className="text-xl lg:text-3xl font-bold">
+              Security Guard Management
+            </h1>
             <p className="text-muted-foreground">
               Manage security guards for your estate
             </p>
@@ -376,70 +381,214 @@ const GuardManagement = () => {
               Security Guards ({guards.length})
             </CardTitle>
           </CardHeader>
-          <CardContent>
+
+          <CardContent className="p-0">
             {guards.length === 0 ? (
-              <div className="text-center py-8">
-                <Shield className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
-                <h3 className="text-lg font-semibold mb-2">
-                  No security guards found
+              <div className="text-center py-12">
+                <Shield className="h-16 w-16 mx-auto text-muted-foreground mb-4" />
+                <h3 className="text-xl font-semibold mb-2 text-foreground">
+                  No Security Guards Found
                 </h3>
-                <p className="text-muted-foreground mb-4">
-                  Add security guards to help manage access to your estate.
+                <p className="text-muted-foreground max-w-sm mx-auto mb-6">
+                  Add security guards to help manage access control and monitor
+                  estate security.
                 </p>
+                <Button onClick={() => setOpen(true)}>
+                  <UserPlus className="h-4 w-4 mr-2" />
+                  Add First Guard
+                </Button>
               </div>
             ) : (
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Name</TableHead>
-                    <TableHead>Email</TableHead>
-                    <TableHead>Phone</TableHead>
-                    <TableHead>Added</TableHead>
-                    <TableHead>Password Status</TableHead>
-                    <TableHead>Actions</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
+              <>
+                {/* Mobile Card View */}
+                <div className="md:hidden space-y-4 p-4">
                   {guards.map((guard) => (
-                    <TableRow key={guard.id}>
-                      <TableCell className="font-medium">
-                        {guard.name}
-                      </TableCell>
-                      <TableCell className="text-muted-foreground">
-                        {guard.email}
-                      </TableCell>
-                      <TableCell>{guard.phone || "N/A"}</TableCell>
-                      <TableCell>
-                        {new Date(guard.createdAt).toLocaleDateString()}
-                      </TableCell>
-                      <TableCell>
+                    <Card
+                      key={guard.id}
+                      className="p-4 border-l-4 border-l-blue-500"
+                    >
+                      <div className="flex items-start justify-between mb-3">
+                        <div className="flex items-center gap-3">
+                          <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                            <Shield className="h-5 w-5 text-blue-600" />
+                          </div>
+                          <div>
+                            <div className="font-semibold text-foreground">
+                              {guard.name}
+                            </div>
+                            <div className="text-sm text-muted-foreground">
+                              {guard.email}
+                            </div>
+                          </div>
+                        </div>
                         <Badge
-                          variant="default"
-                          className="flex items-center gap-1"
+                          variant="secondary"
+                          className="bg-green-50 text-green-700 border-green-200"
                         >
-                          <CheckCircle className="h-3 w-3" />
+                          <CheckCircle className="h-3 w-3 mr-1" />
                           Active
                         </Badge>
-                      </TableCell>
-                      {/* <TableCell>{getPasswordStatusBadge(guard.status)}</TableCell> */}
-                      <TableCell>
-                        <div className="flex items-center gap-2">
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            onClick={() => handleEditGuard(guard)}
-                          >
-                            <Edit className="h-4 w-4" />
-                          </Button>
-                          <Button variant="outline" size="sm">
-                            <Trash2 className="h-4 w-4" />
-                          </Button>
+                      </div>
+
+                      <div className="grid grid-cols-2 gap-4 text-sm mb-4">
+                        <div>
+                          <div className="text-muted-foreground flex items-center gap-1">
+                            <Phone className="h-3 w-3" />
+                            Phone
+                          </div>
+                          <div className="font-medium">
+                            {guard.phone || "N/A"}
+                          </div>
                         </div>
-                      </TableCell>
-                    </TableRow>
+                        <div>
+                          <div className="text-muted-foreground">Added</div>
+                          <div className="font-medium">
+                            {new Date(guard.createdAt).toLocaleDateString(
+                              "en-US",
+                              {
+                                month: "short",
+                                day: "numeric",
+                              }
+                            )}
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-2 pt-3 border-t">
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => handleEditGuard(guard)}
+                          className="flex-1"
+                        >
+                          <Edit className="h-4 w-4 mr-2" />
+                          Edit
+                        </Button>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          className="flex-1 text-destructive hover:text-destructive"
+                        >
+                          <Trash2 className="h-4 w-4 mr-2" />
+                          Remove
+                        </Button>
+                      </div>
+                    </Card>
                   ))}
-                </TableBody>
-              </Table>
+                </div>
+
+                {/* Desktop Table View */}
+                <div className="hidden md:block overflow-hidden">
+                  <div className="overflow-x-auto">
+                    <Table>
+                      <TableHeader>
+                        <TableRow>
+                          <TableHead className="w-[220px] min-w-[200px]">
+                            Security Guard
+                          </TableHead>
+                          <TableHead className="w-[220px] min-w-[180px]">
+                            Email
+                          </TableHead>
+                          <TableHead className="w-[140px] min-w-[120px]">
+                            Phone
+                          </TableHead>
+                          <TableHead className="w-[120px] min-w-[120px]">
+                            Added
+                          </TableHead>
+                          <TableHead className="w-[140px] min-w-[120px]">
+                            Status
+                          </TableHead>
+                          <TableHead className="w-[120px] min-w-[100px] text-right">
+                            Actions
+                          </TableHead>
+                        </TableRow>
+                      </TableHeader>
+                      <TableBody>
+                        {guards.map((guard) => (
+                          <TableRow
+                            key={guard.id}
+                            className="hover:bg-muted/50"
+                          >
+                            <TableCell>
+                              <div className="flex items-center gap-3">
+                                <div className="flex-shrink-0 w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                                  <Shield className="h-4 w-4 text-blue-600" />
+                                </div>
+                                <div>
+                                  <div className="font-medium text-foreground">
+                                    {guard.name}
+                                  </div>
+                                  <div className="text-xs text-muted-foreground">
+                                    Security Guard
+                                  </div>
+                                </div>
+                              </div>
+                            </TableCell>
+                            <TableCell>
+                              <div className="flex items-center gap-2">
+                                <Mail className="h-3 w-3 text-muted-foreground flex-shrink-0" />
+                                <span className="truncate text-muted-foreground">
+                                  {guard.email}
+                                </span>
+                              </div>
+                            </TableCell>
+                            <TableCell>
+                              <div className="flex items-center gap-2">
+                                <Phone className="h-3 w-3 text-muted-foreground flex-shrink-0" />
+                                <span className="truncate">
+                                  {guard.phone || "N/A"}
+                                </span>
+                              </div>
+                            </TableCell>
+                            <TableCell>
+                              <div className="text-sm text-muted-foreground">
+                                {new Date(guard.createdAt).toLocaleDateString(
+                                  "en-US",
+                                  {
+                                    month: "short",
+                                    day: "numeric",
+                                    year: "numeric",
+                                  }
+                                )}
+                              </div>
+                            </TableCell>
+                            <TableCell>
+                              <Badge
+                                variant="secondary"
+                                className="flex items-center gap-1 w-fit bg-green-50 text-green-700 border-green-200"
+                              >
+                                <CheckCircle className="h-3 w-3" />
+                                Active
+                              </Badge>
+                            </TableCell>
+                            <TableCell>
+                              <div className="flex items-center justify-end gap-1">
+                                <Button
+                                  variant="ghost"
+                                  size="sm"
+                                  onClick={() => handleEditGuard(guard)}
+                                  className="h-8 w-8 p-0 hover:bg-blue-50 hover:text-blue-600"
+                                >
+                                  <Edit className="h-3.5 w-3.5" />
+                                  <span className="sr-only">Edit guard</span>
+                                </Button>
+                                <Button
+                                  variant="ghost"
+                                  size="sm"
+                                  className="h-8 w-8 p-0 hover:bg-destructive/10 hover:text-destructive"
+                                >
+                                  <Trash2 className="h-3.5 w-3.5" />
+                                  <span className="sr-only">Delete guard</span>
+                                </Button>
+                              </div>
+                            </TableCell>
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
+                  </div>
+                </div>
+              </>
             )}
           </CardContent>
         </Card>

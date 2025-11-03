@@ -297,7 +297,7 @@ const Dashboard = () => {
                 <RoleIcon className="h-6 w-6" />
               </div>
               <div>
-                <h1 className="text-3xl font-bold text-charcoal font-inter tracking-tight">
+                <h1 className="text-xl md:text-3xl font-bold text-charcoal font-inter tracking-tight">
                   Welcome {user.name || "User"}!
                 </h1>
                 <p className="text-muted-foreground">

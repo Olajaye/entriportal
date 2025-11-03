@@ -115,7 +115,9 @@ const AccessCodeManagement = () => {
     <>
       <div className="space-y-6">
         <div>
-          <h1 className="text-3xl font-bold">Access Code Management</h1>
+          <h1 className="text-xl lg:text-3xl font-bold">
+            Access Code Management
+          </h1>
           <p className="text-muted-foreground">
             Monitor and manage guest access codes
           </p>

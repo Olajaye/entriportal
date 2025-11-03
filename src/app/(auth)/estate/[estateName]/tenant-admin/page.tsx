@@ -1,6 +1,5 @@
 "use client";
 import React, { useState, useEffect, useCallback } from "react";
-
 import {
   Card,
   CardContent,
@@ -10,8 +9,7 @@ import {
 import { Button } from "@/src/component/ui/button";
 import { Input } from "@/src/component/ui/input";
 import { Label } from "@/src/component/ui/label";
-
-import { Mail, Lock, ArrowLeft } from "lucide-react";
+import { Mail, Lock, ArrowLeft, Eye, EyeOff } from "lucide-react";
 import {
   Estate,
   useLazyGetEstateBySlguQuery,
@@ -34,15 +32,14 @@ interface Tenant {
 }
 
 const TenantLogin = () => {
+  // const [isLoading, setIsLoading] = useState(false);
   const { estateName } = useParams<{ estateName: string }>();
   const slug = estateName;
   const [estate, setEstate] = useState<Estate>({} as Estate);
-
   const [userEmail, setUserEmail] = useState("");
-  // const [isLoading, setIsLoading] = useState(false);
   const [showPasswordChange, setShowPasswordChange] = useState(false);
   const [isTemporaryPassword, setIsTemporaryPassword] = useState(false);
-
+  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -147,6 +144,26 @@ const TenantLogin = () => {
     );
   }
 
+  const togglePasswordVisibility = () => {
+    setShowPassword((prev) => !prev);
+  };
+
+  const renderPasswordVisibilityToggle = () => (
+    <Button
+      type="button"
+      variant="ghost"
+      size="sm"
+      className="absolute right-0 top-0 h-full px-3 py-2 "
+      onClick={togglePasswordVisibility}
+    >
+      {showPassword ? (
+        <EyeOff className="h-4 w-4" />
+      ) : (
+        <Eye className="h-4 w-4" />
+      )}
+    </Button>
+  );
+
   return (
     <>
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-offWhite via-background to-lightGray">
@@ -187,14 +204,19 @@ const TenantLogin = () => {
                   <Lock className="h-4 w-4 text-charcoal" />
                   Password
                 </Label>
-                <Input
-                  id="password"
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Enter your password"
-                  required
-                />
+                <div className="relative w-full">
+                  <Input
+                    id="password"
+                    type={showPassword ? "text" : "password"}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="Enter your password"
+                    required
+                    className="pr-10"
+                  />
+
+                  {renderPasswordVisibilityToggle()}
+                </div>
               </div>
               <div className="flex justify-end items-end">
                 <Link href={"/forgetPassword"} className="text-navy font-inter">

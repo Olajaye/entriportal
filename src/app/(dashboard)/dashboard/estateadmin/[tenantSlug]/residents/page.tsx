@@ -34,6 +34,10 @@ import {
   Eye,
   EyeOff,
   CheckCircle,
+  UserPlus,
+  Mail,
+  Phone,
+  Shield,
 } from "lucide-react";
 import { useParams } from "next/navigation";
 import {
@@ -205,10 +209,12 @@ const ResidentManagement = () => {
 
   return (
     <>
-      <div className="space-y-6">
-        <div className="flex items-center justify-between">
-          <div>
-            <h1 className="text-3xl font-bold">Resident Management</h1>
+      <div className="">
+        <div className="sm:flex items-center justify-between mb-4">
+          <div className="mb-5 sm:mb-0">
+            <h1 className="text-xl lg:text-3xl font-bold">
+              Resident Management
+            </h1>
             <p className="text-muted-foreground">
               Manage residents in your estate
             </p>
@@ -343,72 +349,221 @@ const ResidentManagement = () => {
               Residents ({residents.length})
             </CardTitle>
           </CardHeader>
-          <CardContent>
+
+          <CardContent className="p-0">
             {residents.length === 0 ? (
-              <div className="text-center py-8">
-                <Users className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
-                <h3 className="text-lg font-semibold mb-2">
-                  No residents found
+              <div className="text-center py-12">
+                <Users className="h-16 w-16 mx-auto text-muted-foreground mb-4" />
+                <h3 className="text-xl font-semibold mb-2 text-foreground">
+                  No Residents Found
                 </h3>
-                <p className="text-muted-foreground mb-4">
-                  Get started by adding your first resident to the estate.
+                <p className="text-muted-foreground max-w-sm mx-auto mb-6">
+                  Get started by adding your first resident to the estate
+                  management system.
                 </p>
+                <Button onClick={() => setOpen(true)}>
+                  <UserPlus className="h-4 w-4 mr-2" />
+                  Add First Resident
+                </Button>
               </div>
             ) : (
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Name</TableHead>
-                    <TableHead>Email</TableHead>
-                    <TableHead>Unit Number</TableHead>
-                    <TableHead>Phone</TableHead>
-                    <TableHead>Password Status</TableHead>
-                    <TableHead>Registered</TableHead>
-                    <TableHead>Actions</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
+              <>
+                {/* Mobile Card View */}
+                <div className="md:hidden space-y-4 p-4">
                   {residents.map((resident) => (
-                    <TableRow key={resident.id}>
-                      <TableCell className="font-medium">
-                        {resident.name}
-                      </TableCell>
-                      <TableCell className="text-muted-foreground">
-                        {resident.email}
-                      </TableCell>
-                      <TableCell>{resident.unitNumber || "N/A"}</TableCell>
-                      <TableCell>{resident.phone || "N/A"}</TableCell>
-                      {/* <TableCell>{getPasswordStatusBadge(resident)}</TableCell> */}
-                      <TableCell>
+                    <Card
+                      key={resident.id}
+                      className="p-4 border-l-4 border-l-blue-500"
+                    >
+                      <div className="flex items-start justify-between mb-3">
+                        <div className="flex items-center gap-3">
+                          <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                            <Shield className="h-5 w-5 text-blue-600" />
+                          </div>
+                          <div>
+                            <div className="font-semibold text-foreground">
+                              {resident.name}
+                            </div>
+                            <div className="text-sm text-muted-foreground">
+                              {resident.email}
+                            </div>
+                          </div>
+                        </div>
                         <Badge
-                          variant="default"
-                          className="flex items-center gap-1"
+                          variant="secondary"
+                          className="bg-green-50 text-green-700 border-green-200"
                         >
-                          <CheckCircle className="h-3 w-3" />
+                          <CheckCircle className="h-3 w-3 mr-1" />
                           Active
                         </Badge>
-                      </TableCell>
-                      <TableCell>
-                        {new Date(resident.createdAt).toLocaleDateString()}
-                      </TableCell>
-                      <TableCell>
-                        <div className="flex items-center gap-2">
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            onClick={() => handleEditResident(resident)}
-                          >
-                            <Edit className="h-4 w-4" />
-                          </Button>
-                          <Button variant="outline" size="sm">
-                            <Trash2 className="h-4 w-4" />
-                          </Button>
+                      </div>
+
+                      <div className="grid grid-cols-2 gap-4 text-sm mb-4">
+                        <div>
+                          <div className="text-muted-foreground flex items-center gap-1">
+                            <Phone className="h-3 w-3" />
+                            Phone
+                          </div>
+                          <div className="font-medium">
+                            {resident.phone || "N/A"}
+                          </div>
                         </div>
-                      </TableCell>
-                    </TableRow>
+                        <div>
+                          <div className="text-muted-foreground">Added</div>
+                          <div className="font-medium">
+                            {new Date(resident.createdAt).toLocaleDateString(
+                              "en-US",
+                              {
+                                month: "short",
+                                day: "numeric",
+                              }
+                            )}
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-2 pt-3 border-t">
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => handleEditResident(resident)}
+                          className="flex-1"
+                        >
+                          <Edit className="h-4 w-4 mr-2" />
+                          Edit
+                        </Button>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          className="flex-1 text-destructive hover:text-destructive"
+                        >
+                          <Trash2 className="h-4 w-4 mr-2" />
+                          Remove
+                        </Button>
+                      </div>
+                    </Card>
                   ))}
-                </TableBody>
-              </Table>
+                </div>
+                <div className="hidden md:block overflow-hidden">
+                  <div className="overflow-hidden">
+                    <div className="overflow-x-auto">
+                      <Table>
+                        <TableHeader>
+                          <TableRow>
+                            <TableHead className="w-[180px] min-w-[150px]">
+                              Name
+                            </TableHead>
+                            <TableHead className="w-[220px] min-w-[180px]">
+                              Email
+                            </TableHead>
+                            <TableHead className="w-[120px] min-w-[100px]">
+                              Unit
+                            </TableHead>
+                            <TableHead className="w-[140px] min-w-[120px]">
+                              Phone
+                            </TableHead>
+                            <TableHead className="w-[140px] min-w-[120px]">
+                              Status
+                            </TableHead>
+                            <TableHead className="w-[120px] min-w-[130px]">
+                              Registered
+                            </TableHead>
+                            <TableHead className="w-[120px] min-w-[100px] text-right">
+                              Actions
+                            </TableHead>
+                          </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                          {residents.map((resident) => (
+                            <TableRow
+                              key={resident.id}
+                              className="hover:bg-muted/50"
+                            >
+                              <TableCell className="font-medium">
+                                <div className="flex items-center gap-3">
+                                  <div className="flex-shrink-0 w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
+                                    <span className="text-sm font-medium text-primary">
+                                      {resident.name.charAt(0).toUpperCase()}
+                                    </span>
+                                  </div>
+                                  <span className="truncate">
+                                    {resident.name}
+                                  </span>
+                                </div>
+                              </TableCell>
+                              <TableCell>
+                                <div className="flex items-center gap-2">
+                                  <Mail className="h-3 w-3 text-muted-foreground flex-shrink-0" />
+                                  <span className="truncate text-muted-foreground">
+                                    {resident.email}
+                                  </span>
+                                </div>
+                              </TableCell>
+                              <TableCell>
+                                <Badge
+                                  variant="outline"
+                                  className="font-normal"
+                                >
+                                  {resident.unitNumber || "N/A"}
+                                </Badge>
+                              </TableCell>
+                              <TableCell>
+                                <div className="flex items-center gap-2">
+                                  <Phone className="h-3 w-3 text-muted-foreground flex-shrink-0" />
+                                  <span className="truncate">
+                                    {resident.phone || "N/A"}
+                                  </span>
+                                </div>
+                              </TableCell>
+                              <TableCell>
+                                <Badge
+                                  variant="secondary"
+                                  className="flex items-center gap-1 w-fit bg-green-50 text-green-700 border-green-200"
+                                >
+                                  <CheckCircle className="h-3 w-3" />
+                                  Active
+                                </Badge>
+                              </TableCell>
+                              <TableCell>
+                                <div className="text-sm text-muted-foreground">
+                                  {new Date(
+                                    resident.createdAt
+                                  ).toLocaleDateString("en-US", {
+                                    month: "short",
+                                    day: "numeric",
+                                    year: "numeric",
+                                  })}
+                                </div>
+                              </TableCell>
+                              <TableCell>
+                                <div className="flex items-center justify-end gap-1">
+                                  <Button
+                                    variant="ghost"
+                                    size="sm"
+                                    onClick={() => handleEditResident(resident)}
+                                    className="h-8 w-8 p-0 hover:bg-primary/10"
+                                  >
+                                    <Edit className="h-3.5 w-3.5" />
+                                    <span className="sr-only">Edit</span>
+                                  </Button>
+                                  <Button
+                                    variant="ghost"
+                                    size="sm"
+                                    className="h-8 w-8 p-0 hover:bg-destructive/10 hover:text-destructive"
+                                  >
+                                    <Trash2 className="h-3.5 w-3.5" />
+                                    <span className="sr-only">Delete</span>
+                                  </Button>
+                                </div>
+                              </TableCell>
+                            </TableRow>
+                          ))}
+                        </TableBody>
+                      </Table>
+                    </div>
+                  </div>
+                </div>
+              </>
             )}
           </CardContent>
         </Card>
