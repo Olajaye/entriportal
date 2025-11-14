@@ -99,12 +99,12 @@ export async function POST(request: NextRequest) {
 
     // Email data
     const emailData = {
-      name: user.name,
-      resetCode,
+      FULL_NAME: user.name,
+      EMAIL_ADDRESS: user.email,
+      RESET_CODE: resetCode,
+
       expiryTime: "15 minutes",
-      supportEmail: "support@yourapp.com",
     };
-    console.log("Password reset code generated:", emailData);
 
     // Send reset email
     try {

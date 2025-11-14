@@ -107,3 +107,55 @@ model PasswordResetAttempt {
   email       String
   attemptedAt DateTime @default(now())
 }
+
+model Customer {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String
+  phone     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  virtualAccounts VirtualAccount[]
+  transactions    Transaction[]
+}
+
+model VirtualAccount {
+  id            String   @id @default(cuid())
+  customerId    String
+  accountNumber String   @unique
+  bankName      String
+  bankCode      String
+  customerName  String
+  assignedAt    DateTime @default(now())
+  isActive      Boolean  @default(true)
+
+  customer     Customer      @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  transactions Transaction[]
+
+  @@index([customerId])
+  @@index([accountNumber])
+}
+
+model Transaction {
+  id               String            @id @default(cuid())
+  virtualAccountId String
+  amount           Float
+  reference        String            @unique
+  status           TransactionStatus @default(PENDING)
+  paidAt           DateTime?
+  createdAt        DateTime          @default(now())
+
+  virtualAccount VirtualAccount @relation(fields: [virtualAccountId], references: [id], onDelete: Cascade)
+  customer       Customer?      @relation(fields: [customerId], references: [id])
+  customerId     String?
+
+  @@index([virtualAccountId])
+  @@index([reference])
+}
+
+enum TransactionStatus {
+  PENDING
+  SUCCESS
+  FAILED
+}

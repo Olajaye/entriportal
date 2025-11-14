@@ -48,20 +48,14 @@ export async function GET(request: NextRequest) {
       });
 
       const data = {
-        name: user.name,
-        email: user.email,
-        estate: estate.estateName,
-        password: user.password,
-        role: "Estate Admin",
-        link: `${baseUrl}/entri`,
+        FULL_NAME: user.name,
+        ESTATE_NAME: estate.estateName,
+        EMAIL_ADDRESS: user.email,
+        TEMP_PASSWORD: user.password,
+        LOGIN_URL: `${baseUrl}/entri`,
       };
 
-      await sendEmail(
-        user.email,
-        "Welcome to Entri",
-        "tenantAdminTemplate",
-        data
-      );
+      await sendEmail(user.email, "Welcome to Entri", "estateAdmin", data);
 
       return NextResponse.redirect(`${baseUrl}/entri/?reference=${reference}`);
     } else {

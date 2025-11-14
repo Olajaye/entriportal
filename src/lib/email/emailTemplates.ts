@@ -1,349 +1,1603 @@
-export const tenantAdminTemplate = ({
-  name,
-  email,
-  role,
-  password,
-  estate,
-  link,
+export const estateAdmin = ({
+  FULL_NAME,
+  ESTATE_NAME,
+  EMAIL_ADDRESS,
+  TEMP_PASSWORD,
+  LOGIN_URL,
 }: {
-  name: string;
-  email: string;
-  role: string;
-  estate: string;
-  password: string;
-  link: string;
-}) => `
-<!DOCTYPE html>
+  FULL_NAME: string;
+  ESTATE_NAME: string;
+  EMAIL_ADDRESS: string;
+  TEMP_PASSWORD: string;
+  LOGIN_URL: string;
+}) => `<!DOCTYPE html>
 <html>
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body { font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 20px; }
-    .container { max-width: 600px; margin: 0 auto; background: white; padding: 20px; border-radius: 8px; }
-    .header { text-align: center; color: #333; }
-    .details { margin: 20px 0; padding: 15px; background: #f9f9f9; border-radius: 5px; }
-    .detail-item { margin-bottom: 10px; }
-    .footer { margin-top: 30px; font-size: 0.9em; color: #777; text-align: center; }
-    @media (max-width: 600px) { .container { padding: 10px; } }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <h1 class="header">Welcome to EntriPortal, ${name} 🎉</h1>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body
+    style="
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+      font-family: 'Inter', Arial, sans-serif;
+    "
+  >
+    <table
+      role="presentation"
+      cellspacing="0"
+      cellpadding="0"
+      border="0"
+      width="100%"
+      style="background-color: #f5f5f5"
+    >
+      <tr>
+        <td style="padding: 40px 20px">
+          <table
+            role="presentation"
+            cellspacing="0"
+            cellpadding="0"
+            border="0"
+            width="600"
+            style="
+              margin: 0 auto;
+              background-color: #ffffff;
+              border-radius: 12px;
+              overflow: hidden;
+              box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            "
+          >
+            <tr>
+              <td
+                style="
+                  background: linear-gradient(135deg, #1e3a5f 0%, #d97757 100%);
+                  padding: 40px 32px;
+                  text-align: center;
+                "
+              >
+                <h1
+                  style="
+                    margin: 0;
+                    color: #ffffff;
+                    font-size: 28px;
+                    font-weight: 700;
+                  "
+                >
+                  Welcome to Entri
+                </h1>
+                <p
+                  style="
+                    margin: 8px 0 0 0;
+                    color: rgba(255, 255, 255, 0.9);
+                    font-size: 16px;
+                  "
+                >
+                  Your Estate Management Platform
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 40px 32px">
+                <p
+                  style="
+                    margin: 0 0 16px 0;
+                    color: #2c3e50;
+                    font-size: 16px;
+                    line-height: 1.6;
+                  "
+                >
+                  Hi <strong>${FULL_NAME}</strong>,
+                </p>
+                <p
+                  style="
+                    margin: 0 0 24px 0;
+                    color: #2c3e50;
+                    font-size: 16px;
+                    line-height: 1.6;
+                  "
+                >
+                  You've been assigned as an
+                  <strong style="color: #d97757">Estate Administrator</strong>
+                  for <strong>${ESTATE_NAME}</strong>. Your account is now
+                  active!
+                </p>
+                <table
+                  role="presentation"
+                  cellspacing="0"
+                  cellpadding="0"
+                  border="0"
+                  width="100%"
+                  style="
+                    background-color: #f5efe7;
+                    border-radius: 8px;
+                    margin: 24px 0;
+                  "
+                >
+                  <tr>
+                    <td style="padding: 24px">
+                      <h3
+                        style="
+                          margin: 0 0 16px 0;
+                          color: #1e3a5f;
+                          font-size: 16px;
+                          font-weight: 600;
+                        "
+                      >
+                        Your Login Credentials
+                      </h3>
+                      <p
+                        style="
+                          margin: 0 0 8px 0;
+                          color: #64748b;
+                          font-size: 13px;
+                          font-weight: 600;
+                          text-transform: uppercase;
+                        "
+                      >
+                        Email Address
+                      </p>
+                      <p
+                        style="
+                          margin: 0 0 16px 0;
+                          color: #2c3e50;
+                          font-size: 15px;
+                          font-family: 'Courier New', monospace;
+                          background: #ffffff;
+                          padding: 10px;
+                          border-radius: 4px;
+                        "
+                      >
+                        ${EMAIL_ADDRESS}
+                      </p>
+                      <p
+                        style="
+                          margin: 0 0 8px 0;
+                          color: #64748b;
+                          font-size: 13px;
+                          font-weight: 600;
+                          text-transform: uppercase;
+                        "
+                      >
+                        Temporary Password
+                      </p>
+                      <p
+                        style="
+                          margin: 0 0 16px 0;
+                          color: #2c3e50;
+                          font-size: 15px;
+                          font-family: 'Courier New', monospace;
+                          background: #ffffff;
+                          padding: 10px;
+                          border-radius: 4px;
+                        "
+                      >
+                        ${TEMP_PASSWORD}
+                      </p>
+                      <p
+                        style="
+                          margin: 0 0 8px 0;
+                          color: #64748b;
+                          font-size: 13px;
+                          font-weight: 600;
+                          text-transform: uppercase;
+                        "
+                      >
+                        Your Role
+                      </p>
+                      <p
+                        style="
+                          margin: 0;
+                          color: #d97757;
+                          font-size: 15px;
+                          font-weight: 600;
+                        "
+                      >
+                        Estate Administrator
+                      </p>
+                    </td>
+                  </tr>
+                </table>
+                <table
+                  role="presentation"
+                  cellspacing="0"
+                  cellpadding="0"
+                  border="0"
+                  width="100%"
+                  style="margin: 32px 0"
+                >
+                  <tr>
+                    <td align="center">
+                      <a
+                        href="${LOGIN_URL}"
+                        style="
+                          display: inline-block;
+                          background-color: #d97757;
+                          color: #ffffff;
+                          text-decoration: none;
+                          padding: 14px 32px;
+                          border-radius: 8px;
+                          font-weight: 600;
+                          font-size: 16px;
+                        "
+                        >Access Your Dashboard</a
+                      >
+                    </td>
+                  </tr>
+                </table>
+                <table
+                  role="presentation"
+                  cellspacing="0"
+                  cellpadding="0"
+                  border="0"
+                  width="100%"
+                  style="
+                    background-color: #fff5f1;
+                    border-left: 4px solid #d97757;
+                    border-radius: 4px;
+                    margin: 24px 0;
+                  "
+                >
+                  <tr>
+                    <td style="padding: 16px 20px">
+                      <p
+                        style="
+                          margin: 0;
+                          color: #d97757;
+                          font-size: 14px;
+                          font-weight: 600;
+                        "
+                      >
+                        🔐 Security First
+                      </p>
+                      <p
+                        style="
+                          margin: 8px 0 0 0;
+                          color: #2c3e50;
+                          font-size: 14px;
+                          line-height: 1.6;
+                        "
+                      >
+                        Please change your temporary password immediately after
+                        your first login.
+                      </p>
+                    </td>
+                  </tr>
+                </table>
+                <p
+                  style="
+                    margin: 24px 0 0 0;
+                    color: #64748b;
+                    font-size: 14px;
+                    line-height: 1.6;
+                  "
+                >
+                  Need help? Contact
+                  <a
+                    href="mailto:entri@neurobytes.io"
+                    style="color: #d97757; text-decoration: none"
+                    >entri@neurobytes.io</a
+                  >
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td
+                style="
+                  background-color: #fafaf8;
+                  padding: 24px 32px;
+                  border-top: 1px solid #e2e8f0;
+                "
+              >
+                <p
+                  style="
+                    margin: 0 0 8px 0;
+                    color: #2c3e50;
+                    font-size: 16px;
+                    font-weight: 600;
+                  "
+                >
+                  Connect. Manage. Thrive.
+                </p>
+                <p style="margin: 0; color: #64748b; font-size: 13px">
+                  © 2025 Entri by Neurobytes. All rights reserved.
+                </p>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
+`;
 
-    <p>Hello ${name},</p>
-    <p>You have been successfully onboarded as a Tenant Admin. Below are your login credentials:</p>
+export const residentUser = ({
+  FULL_NAME,
+  ESTATE_NAME,
+  EMAIL_ADDRESS,
+  TEMP_PASSWORD,
+  LOGIN_URL,
+}: {
+  FULL_NAME: string;
+  ESTATE_NAME: string;
+  EMAIL_ADDRESS: string;
+  TEMP_PASSWORD: string;
+  LOGIN_URL: string;
+}) => `<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body
+    style="
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+      font-family: 'Inter', Arial, sans-serif;
+    "
+  >
+    <table
+      role="presentation"
+      cellspacing="0"
+      cellpadding="0"
+      border="0"
+      width="100%"
+      style="background-color: #f5f5f5"
+    >
+      <tr>
+        <td style="padding: 40px 20px">
+          <table
+            role="presentation"
+            cellspacing="0"
+            cellpadding="0"
+            border="0"
+            width="600"
+            style="
+              margin: 0 auto;
+              background-color: #ffffff;
+              border-radius: 12px;
+              overflow: hidden;
+              box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            "
+          >
+            <tr>
+              <td
+                style="
+                  background: linear-gradient(135deg, #1e3a5f 0%, #d97757 100%);
+                  padding: 40px 32px;
+                  text-align: center;
+                "
+              >
+                <h1
+                  style="
+                    margin: 0;
+                    color: #ffffff;
+                    font-size: 28px;
+                    font-weight: 700;
+                  "
+                >
+                  Welcome Home!
+                </h1>
+                <p
+                  style="
+                    margin: 8px 0 0 0;
+                    color: rgba(255, 255, 255, 0.9);
+                    font-size: 16px;
+                  "
+                >
+                  Your Entri account is ready
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 40px 32px">
+                <p
+                  style="
+                    margin: 0 0 16px 0;
+                    color: #2c3e50;
+                    font-size: 16px;
+                    line-height: 1.6;
+                  "
+                >
+                  Hi <strong>${FULL_NAME}</strong>,
+                </p>
+                <p
+                  style="
+                    margin: 0 0 24px 0;
+                    color: #2c3e50;
+                    font-size: 16px;
+                    line-height: 1.6;
+                  "
+                >
+                  Welcome to <strong>${ESTATE_NAME}</strong>! Your Entri
+                  account has been created.
+                </p>
+                <p
+                  style="
+                    margin: 0 0 24px 0;
+                    color: #2c3e50;
+                    font-size: 16px;
+                    line-height: 1.6;
+                  "
+                >
+                  Generate visitor codes, pay service charges, report issues,
+                  and stay updated—all in one place.
+                </p>
+                <table
+                  role="presentation"
+                  cellspacing="0"
+                  cellpadding="0"
+                  border="0"
+                  width="100%"
+                  style="
+                    background-color: #f5efe7;
+                    border-radius: 8px;
+                    margin: 24px 0;
+                  "
+                >
+                  <tr>
+                    <td style="padding: 24px">
+                      <h3
+                        style="
+                          margin: 0 0 16px 0;
+                          color: #1e3a5f;
+                          font-size: 16px;
+                          font-weight: 600;
+                        "
+                      >
+                        Your Login Credentials
+                      </h3>
+                      <p
+                        style="
+                          margin: 0 0 8px 0;
+                          color: #64748b;
+                          font-size: 13px;
+                          font-weight: 600;
+                          text-transform: uppercase;
+                        "
+                      >
+                        Email Address
+                      </p>
+                      <p
+                        style="
+                          margin: 0 0 16px 0;
+                          color: #2c3e50;
+                          font-size: 15px;
+                          font-family: 'Courier New', monospace;
+                          background: #ffffff;
+                          padding: 10px;
+                          border-radius: 4px;
+                        "
+                      >
+                        ${EMAIL_ADDRESS}
+                      </p>
+                      <p
+                        style="
+                          margin: 0 0 8px 0;
+                          color: #64748b;
+                          font-size: 13px;
+                          font-weight: 600;
+                          text-transform: uppercase;
+                        "
+                      >
+                        Temporary Password
+                      </p>
+                      <p
+                        style="
+                          margin: 0 0 16px 0;
+                          color: #2c3e50;
+                          font-size: 15px;
+                          font-family: 'Courier New', monospace;
+                          background: #ffffff;
+                          padding: 10px;
+                          border-radius: 4px;
+                        "
+                      >
+                        ${TEMP_PASSWORD}
+                      </p>
+                      <p
+                        style="
+                          margin: 0 0 8px 0;
+                          color: #64748b;
+                          font-size: 13px;
+                          font-weight: 600;
+                          text-transform: uppercase;
+                        "
+                      >
+                        Your Role
+                      </p>
+                      <p
+                        style="
+                          margin: 0;
+                          color: #d97757;
+                          font-size: 15px;
+                          font-weight: 600;
+                        "
+                      >
+                        Resident
+                      </p>
+                    </td>
+                  </tr>
+                </table>
+                <table
+                  role="presentation"
+                  cellspacing="0"
+                  cellpadding="0"
+                  border="0"
+                  width="100%"
+                  style="margin: 32px 0"
+                >
+                  <tr>
+                    <td align="center">
+                      <a
+                        href="${LOGIN_URL}"
+                        style="
+                          display: inline-block;
+                          background-color: #d97757;
+                          color: #ffffff;
+                          text-decoration: none;
+                          padding: 14px 32px;
+                          border-radius: 8px;
+                          font-weight: 600;
+                          font-size: 16px;
+                        "
+                        >Log In to Entri</a
+                      >
+                    </td>
+                  </tr>
+                </table>
+                <table
+                  role="presentation"
+                  cellspacing="0"
+                  cellpadding="0"
+                  border="0"
+                  width="100%"
+                  style="
+                    background-color: #fff5f1;
+                    border-left: 4px solid #d97757;
+                    border-radius: 4px;
+                    margin: 24px 0;
+                  "
+                >
+                  <tr>
+                    <td style="padding: 16px 20px">
+                      <p
+                        style="
+                          margin: 0;
+                          color: #d97757;
+                          font-size: 14px;
+                          font-weight: 600;
+                        "
+                      >
+                        🔐 First Login
+                      </p>
+                      <p
+                        style="
+                          margin: 8px 0 0 0;
+                          color: #2c3e50;
+                          font-size: 14px;
+                          line-height: 1.6;
+                        "
+                      >
+                        Change your password when you first log in. Choose a
+                        strong password.
+                      </p>
+                    </td>
+                  </tr>
+                </table>
+                <p
+                  style="
+                    margin: 24px 0 0 0;
+                    color: #64748b;
+                    font-size: 14px;
+                    line-height: 1.6;
+                  "
+                >
+                  Questions?
+                  <a
+                    href="mailto:entri@neurobytes.io"
+                    style="color: #d97757; text-decoration: none"
+                    >entri@neurobytes.io</a
+                  >
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td
+                style="
+                  background-color: #fafaf8;
+                  padding: 24px 32px;
+                  border-top: 1px solid #e2e8f0;
+                "
+              >
+                <p
+                  style="
+                    margin: 0 0 8px 0;
+                    color: #2c3e50;
+                    font-size: 16px;
+                    font-weight: 600;
+                  "
+                >
+                  Connect. Manage. Thrive.
+                </p>
+                <p style="margin: 0; color: #64748b; font-size: 13px">
+                  © 2025 Entri by Neurobytes. All rights reserved.
+                </p>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
+`;
 
-    <div class="details">
-      <div class="detail-item"><strong>Email:</strong> ${email}</div>
-      <div class="detail-item"><strong>Temporary Password:</strong> ${password}</div>
-      <div class="detail-item"><strong>Estate Name:</strong> ${estate}</div>
-       <div class="detail-item"><strong>User Role:</strong> ${role}</div>
-    </div>
-
-    <p>⚠️ Please log in and change your password as soon as possible for security reasons.</p>
-    <p>To get started, visit <a href=${link} target="_blank">your dashboard</a>.</p>
-
-    <div class="footer">
-      &copy; ${new Date().getFullYear()} EntriPortal. All rights reserved.
-    </div>
-  </div>
-</body>
+export const securityUser = ({
+  FULL_NAME,
+  ESTATE_NAME,
+  EMAIL_ADDRESS,
+  TEMP_PASSWORD,
+  LOGIN_URL,
+}: {
+  FULL_NAME: string;
+  ESTATE_NAME: string;
+  EMAIL_ADDRESS: string;
+  TEMP_PASSWORD: string;
+  LOGIN_URL: string;
+}) => `<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body
+    style="
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+      font-family: 'Inter', Arial, sans-serif;
+    "
+  >
+    <table
+      role="presentation"
+      cellspacing="0"
+      cellpadding="0"
+      border="0"
+      width="100%"
+      style="background-color: #f5f5f5"
+    >
+      <tr>
+        <td style="padding: 40px 20px">
+          <table
+            role="presentation"
+            cellspacing="0"
+            cellpadding="0"
+            border="0"
+            width="600"
+            style="
+              margin: 0 auto;
+              background-color: #ffffff;
+              border-radius: 12px;
+              overflow: hidden;
+              box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            "
+          >
+            <tr>
+              <td
+                style="
+                  background: linear-gradient(135deg, #1e3a5f 0%, #d97757 100%);
+                  padding: 40px 32px;
+                  text-align: center;
+                "
+              >
+                <h1
+                  style="
+                    margin: 0;
+                    color: #ffffff;
+                    font-size: 28px;
+                    font-weight: 700;
+                  "
+                >
+                  Welcome to the Team
+                </h1>
+                <p
+                  style="
+                    margin: 8px 0 0 0;
+                    color: rgba(255, 255, 255, 0.9);
+                    font-size: 16px;
+                  "
+                >
+                  Your Entri Security Account
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 40px 32px">
+                <p
+                  style="
+                    margin: 0 0 16px 0;
+                    color: #2c3e50;
+                    font-size: 16px;
+                    line-height: 1.6;
+                  "
+                >
+                  Hi <strong>${FULL_NAME}</strong>,
+                </p>
+                <p
+                  style="
+                    margin: 0 0 24px 0;
+                    color: #2c3e50;
+                    font-size: 16px;
+                    line-height: 1.6;
+                  "
+                >
+                  You've been registered as a
+                  <strong style="color: #d97757">Security Guard</strong> for
+                  <strong>${ESTATE_NAME}</strong>.
+                </p>
+                <table
+                  role="presentation"
+                  cellspacing="0"
+                  cellpadding="0"
+                  border="0"
+                  width="100%"
+                  style="
+                    background-color: #f5efe7;
+                    border-radius: 8px;
+                    margin: 24px 0;
+                  "
+                >
+                  <tr>
+                    <td style="padding: 24px">
+                      <h3
+                        style="
+                          margin: 0 0 16px 0;
+                          color: #1e3a5f;
+                          font-size: 16px;
+                          font-weight: 600;
+                        "
+                      >
+                        Your Login Credentials
+                      </h3>
+                      <p
+                        style="
+                          margin: 0 0 8px 0;
+                          color: #64748b;
+                          font-size: 13px;
+                          font-weight: 600;
+                          text-transform: uppercase;
+                        "
+                      >
+                        Email Address
+                      </p>
+                      <p
+                        style="
+                          margin: 0 0 16px 0;
+                          color: #2c3e50;
+                          font-size: 15px;
+                          font-family: 'Courier New', monospace;
+                          background: #ffffff;
+                          padding: 10px;
+                          border-radius: 4px;
+                        "
+                      >
+                        ${EMAIL_ADDRESS}
+                      </p>
+                      <p
+                        style="
+                          margin: 0 0 8px 0;
+                          color: #64748b;
+                          font-size: 13px;
+                          font-weight: 600;
+                          text-transform: uppercase;
+                        "
+                      >
+                        Temporary Password
+                      </p>
+                      <p
+                        style="
+                          margin: 0 0 16px 0;
+                          color: #2c3e50;
+                          font-size: 15px;
+                          font-family: 'Courier New', monospace;
+                          background: #ffffff;
+                          padding: 10px;
+                          border-radius: 4px;
+                        "
+                      >
+                        ${TEMP_PASSWORD}
+                      </p>
+                      <p
+                        style="
+                          margin: 0 0 8px 0;
+                          color: #64748b;
+                          font-size: 13px;
+                          font-weight: 600;
+                          text-transform: uppercase;
+                        "
+                      >
+                        Your Role
+                      </p>
+                      <p
+                        style="
+                          margin: 0;
+                          color: #d97757;
+                          font-size: 15px;
+                          font-weight: 600;
+                        "
+                      >
+                        Security Guard
+                      </p>
+                    </td>
+                  </tr>
+                </table>
+                <table
+                  role="presentation"
+                  cellspacing="0"
+                  cellpadding="0"
+                  border="0"
+                  width="100%"
+                  style="
+                    background-color: #eff6ff;
+                    border-radius: 8px;
+                    margin: 24px 0;
+                  "
+                >
+                  <tr>
+                    <td style="padding: 20px">
+                      <h3
+                        style="
+                          margin: 0 0 12px 0;
+                          color: #1e3a5f;
+                          font-size: 15px;
+                          font-weight: 600;
+                        "
+                      >
+                        Quick Guide
+                      </h3>
+                      <ul
+                        style="
+                          margin: 0;
+                          padding-left: 20px;
+                          color: #2c3e50;
+                          font-size: 14px;
+                          line-height: 1.8;
+                        "
+                      >
+                        <li>Validate visitor codes instantly</li>
+                        <li>Log all entries and exits</li>
+                        <li>Report incidents with photos</li>
+                        <li>View resident information</li>
+                      </ul>
+                    </td>
+                  </tr>
+                </table>
+                <table
+                  role="presentation"
+                  cellspacing="0"
+                  cellpadding="0"
+                  border="0"
+                  width="100%"
+                  style="margin: 32px 0"
+                >
+                  <tr>
+                    <td align="center">
+                      <a
+                        href="${LOGIN_URL}"
+                        style="
+                          display: inline-block;
+                          background-color: #d97757;
+                          color: #ffffff;
+                          text-decoration: none;
+                          padding: 14px 32px;
+                          border-radius: 8px;
+                          font-weight: 600;
+                          font-size: 16px;
+                        "
+                        >Access Security Portal</a
+                      >
+                    </td>
+                  </tr>
+                </table>
+                <table
+                  role="presentation"
+                  cellspacing="0"
+                  cellpadding="0"
+                  border="0"
+                  width="100%"
+                  style="
+                    background-color: #fff5f1;
+                    border-left: 4px solid #d97757;
+                    border-radius: 4px;
+                    margin: 24px 0;
+                  "
+                >
+                  <tr>
+                    <td style="padding: 16px 20px">
+                      <p
+                        style="
+                          margin: 0;
+                          color: #d97757;
+                          font-size: 14px;
+                          font-weight: 600;
+                        "
+                      >
+                        🔐 Important
+                      </p>
+                      <p
+                        style="
+                          margin: 8px 0 0 0;
+                          color: #2c3e50;
+                          font-size: 14px;
+                          line-height: 1.6;
+                        "
+                      >
+                        Change your password after first login. Keep credentials
+                        secure.
+                      </p>
+                    </td>
+                  </tr>
+                </table>
+                <p
+                  style="
+                    margin: 24px 0 0 0;
+                    color: #64748b;
+                    font-size: 14px;
+                    line-height: 1.6;
+                  "
+                >
+                  Need help?
+                  <a
+                    href="mailto:entri@neurobytes.io"
+                    style="color: #d97757; text-decoration: none"
+                    >entri@neurobytes.io</a
+                  >
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td
+                style="
+                  background-color: #fafaf8;
+                  padding: 24px 32px;
+                  border-top: 1px solid #e2e8f0;
+                "
+              >
+                <p
+                  style="
+                    margin: 0 0 8px 0;
+                    color: #2c3e50;
+                    font-size: 16px;
+                    font-weight: 600;
+                  "
+                >
+                  Connect. Manage. Thrive.
+                </p>
+                <p style="margin: 0; color: #64748b; font-size: 13px">
+                  © 2025 Entri by Neurobytes. All rights reserved.
+                </p>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
 </html>
 `;
 
 export const passwordResetTemplate = ({
-  name,
-  resetCode,
-  supportEmail,
-  expiryTime,
+  FULL_NAME,
+  EMAIL_ADDRESS,
+  RESET_CODE,
 }: {
-  name: string;
-  resetCode: string;
-  supportEmail: string;
-  expiryTime: string;
+  FULL_NAME: string;
+  EMAIL_ADDRESS: string;
+  RESET_CODE: string;
 }) => `<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reset Your Password</title>
-    <style>
-        @media only screen and (max-width: 600px) {
-            .container {
-                width: 100% !important;
-                border-radius: 0 !important;
-            }
-            .content {
-                padding: 20px !important;
-            }
-            .code-container {
-                padding: 15px !important;
-            }
-            .code {
-                font-size: 32px !important;
-                letter-spacing: 8px !important;
-                padding: 20px 10px !important;
-            }
-        }
-    </style>
-</head>
-<body style="margin: 0; padding: 0; background-color: #f8fafc; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;">
-    <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #f8fafc;">
-        <tr>
-            <td align="center" style="padding: 40px 20px;">
-                <!-- Logo/Brand Header -->
-                <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px; margin-bottom: 20px;">
-                    <tr>
-                        <td align="center">
-                            <div style="font-size: 24px; font-weight: bold; color: #f59e0b;">ENTRI</div>
-                        </td>
-                    </tr>
-                </table>
-
-                <!-- Main Content Card -->
-                <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px; background: #ffffff; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); overflow: hidden;">
-                    <!-- Header -->
-                    <tr>
-                        <td style="background: linear-gradient(135deg, #f59e0b, #d97706); padding: 40px 40px 30px 40px; text-align: center;">
-                            <h1 style="margin: 0; color: white; font-size: 28px; font-weight: 600;">Password Reset</h1>
-                            <p style="margin: 8px 0 0 0; color: rgba(255, 255, 255, 0.9); font-size: 16px;">Secure your account</p>
-                        </td>
-                    </tr>
-
-                    <!-- Content -->
-                    <tr>
-                        <td class="content" style="padding: 40px;">
-                            <!-- Greeting -->
-                            <p style="margin: 0 0 20px 0; color: #374151; font-size: 16px; line-height: 1.6;">
-                                Hello <strong>${name}</strong>,
-                            </p>
-                            
-                            <p style="margin: 0 0 24px 0; color: #6b7280; font-size: 16px; line-height: 1.6;">
-                                You requested to reset your password. Use the verification code below to proceed:
-                            </p>
-
-                            <!-- Reset Code -->
-                            <div style="text-align: center; margin: 32px 0;">
-                                <div class="code-container" style="background: #fef3c7; border: 2px dashed #f59e0b; border-radius: 12px; padding: 20px; display: inline-block;">
-                                    <div class="code" style="font-family: 'Courier New', monospace; font-size: 40px; font-weight: 700; color: #92400e; letter-spacing: 12px; padding: 10px 20px; background: #fef3c7; border-radius: 8px;">
-                                        ${resetCode}
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Instructions -->
-                            <div style="background: #f9fafb; border-radius: 8px; padding: 20px; margin: 24px 0;">
-                                <h3 style="margin: 0 0 12px 0; color: #374151; font-size: 16px; font-weight: 600;">📝 Instructions:</h3>
-                                <ol style="margin: 0; padding-left: 20px; color: #6b7280; font-size: 14px; line-height: 1.6;">
-                                    <li>Enter this code in the password reset form</li>
-                                    <li>Create your new password</li>
-                                    <li>Sign in with your new credentials</li>
-                                </ol>
-                            </div>
-
-                            <!-- Expiry Warning -->
-                            <div style="background: #fef2f2; border-left: 4px solid #dc2626; border-radius: 4px; padding: 16px; margin: 24px 0;">
-                                <p style="margin: 0; color: #dc2626; font-size: 14px; font-weight: 500;">
-                                    ⚠️ This code will expire in <strong>${expiryTime}</strong>
-                                </p>
-                            </div>
-
-                            <!-- Security Note -->
-                            <div style="border-top: 1px solid #e5e7eb; padding-top: 24px; margin-top: 24px;">
-                                <p style="margin: 0 0 12px 0; color: #6b7280; font-size: 14px;">
-                                    <strong>Security Tip:</strong> Never share this code with anyone. Our team will never ask for your verification code.
-                                </p>
-                                <p style="margin: 0; color: #6b7280; font-size: 14px;">
-                                    If you didn't request this reset, please ignore this email or contact support if you're concerned about your account's security.
-                                </p>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-
-                <!-- Support Section -->
-                <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px; margin-top: 20px;">
-                    <tr>
-                        <td align="center" style="padding: 20px;">
-                            <p style="margin: 0 0 8px 0; color: #6b7280; font-size: 14px;">
-                                Need help? Contact our support team
-                            </p>
-                            <a href="mailto:${supportEmail}" style="color: #f59e0b; text-decoration: none; font-weight: 500; font-size: 14px;">
-                                ${supportEmail}
-                            </a>
-                        </td>
-                    </tr>
-                </table>
-
-                <!-- Footer -->
-                <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px; margin-top: 20px;">
-                    <tr>
-                        <td align="center" style="padding: 20px;">
-                            <p style="margin: 0; color: #9ca3af; font-size: 12px; line-height: 1.5;">
-                                &copy; 2024 Entri. All rights reserved.<br>
-                                This email was sent to you as part of our account security services.
-                            </p>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-    </table>
-</body>
-</html>`;
-
-export const subscriptionReminderTemplate = ({
-  estateName,
-  plan,
-  expirationDate,
-  upgradeLink,
-  supportLink,
-}: {
-  estateName: string;
-  plan: string;
-  expirationDate: string;
-  upgradeLink: string;
-  supportLink: string;
-}) => `
-<!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Subscription Expiration Reminder</title>
-    <style>
-      body {
-        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-        background-color: #f7f9fc;
-        color: #333333;
-        margin: 0;
-        padding: 0;
-      }
-
-      .email-container {
-        max-width: 600px;
-        margin: 30px auto;
-        background: #ffffff;
-        border-radius: 10px;
-        overflow: hidden;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-      }
-
-      .header {
-        background-color: #2563eb; /* Entri blue accent */
-        color: white;
-        text-align: center;
-        padding: 25px 20px;
-      }
-
-      .header h1 {
-        margin: 0;
-        font-size: 24px;
-        font-weight: 600;
-      }
-
-      .content {
-        padding: 30px 25px;
-        text-align: left;
-        line-height: 1.6;
-      }
-
-      .content h2 {
-        color: #111827;
-        font-size: 20px;
-        margin-bottom: 15px;
-      }
-
-      .content p {
-        margin: 10px 0;
-        color: #374151;
-      }
-
-      .highlight {
-        color: #2563eb;
-        font-weight: 600;
-      }
-
-      .button {
-        display: inline-block;
-        background-color: #2563eb;
-        color: #ffffff;
-        text-decoration: none;
-        padding: 12px 22px;
-        border-radius: 6px;
-        font-weight: 600;
-        margin-top: 25px;
-      }
-
-      .footer {
-        background-color: #f3f4f6;
-        text-align: center;
-        padding: 15px 20px;
-        font-size: 14px;
-        color: #6b7280;
-      }
-
-      .footer a {
-        color: #2563eb;
-        text-decoration: none;
-      }
-
-      @media (max-width: 600px) {
-        .content {
-          padding: 20px;
-        }
-
-        .button {
-          display: block;
-          width: 100%;
-          text-align: center;
-        }
-      }
-    </style>
   </head>
-
-  <body>
-    <div class="email-container">
-      <div class="header">
-        <h1>Subscription Reminder</h1>
-      </div>
-
-      <div class="content">
-        <h2>Hi ${estateName} Team,</h2>
-
-        <p>
-          We wanted to remind you that your current
-          <span class="highlight">${plan}</span> subscription plan will expire
-          on <span class="highlight">${expirationDate}</span>.
-        </p>
-
-        <p>
-          To ensure uninterrupted access to your Entri services, please renew or
-          upgrade your plan before the expiration date.
-        </p>
-
-        <a
-          href="${upgradeLink}"
-          class="button"
-          target="_blank"
-          >Renew / Upgrade Plan</a
-        >
-
-        <p>
-          If you’ve already renewed, please disregard this message. Thank you
-          for being a valued member of the Entri community!
-        </p>
-      </div>
-
-      <div class="footer">
-        <p>
-          © {{currentYear}} Entri. All rights reserved.  
-          <br />
-          <a href="${supportLink}">Contact Support</a>
-        </p>
-      </div>
-    </div>
+  <body
+    style="
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+      font-family: 'Inter', Arial, sans-serif;
+    "
+  >
+    <table
+      role="presentation"
+      cellspacing="0"
+      cellpadding="0"
+      border="0"
+      width="100%"
+      style="background-color: #f5f5f5"
+    >
+      <tr>
+        <td style="padding: 40px 20px">
+          <table
+            role="presentation"
+            cellspacing="0"
+            cellpadding="0"
+            border="0"
+            width="600"
+            style="
+              margin: 0 auto;
+              background-color: #ffffff;
+              border-radius: 12px;
+              overflow: hidden;
+              box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            "
+          >
+            <tr>
+              <td
+                style="
+                  background: linear-gradient(135deg, #1e3a5f 0%, #d97757 100%);
+                  padding: 40px 32px;
+                  text-align: center;
+                "
+              >
+                <h1
+                  style="
+                    margin: 0;
+                    color: #ffffff;
+                    font-size: 28px;
+                    font-weight: 700;
+                  "
+                >
+                  Password Reset Request
+                </h1>
+                <p
+                  style="
+                    margin: 8px 0 0 0;
+                    color: rgba(255, 255, 255, 0.9);
+                    font-size: 16px;
+                  "
+                >
+                  Let's get you back in
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 40px 32px">
+                <p
+                  style="
+                    margin: 0 0 16px 0;
+                    color: #2c3e50;
+                    font-size: 16px;
+                    line-height: 1.6;
+                  "
+                >
+                  Hi <strong>${FULL_NAME}</strong>,
+                </p>
+                <p
+                  style="
+                    margin: 0 0 24px 0;
+                    color: #2c3e50;
+                    font-size: 16px;
+                    line-height: 1.6;
+                  "
+                >
+                  We received a request to reset your password for
+                  <strong>${EMAIL_ADDRESS}</strong>.
+                </p>
+                <p
+                  style="
+                    margin: 0 0 24px 0;
+                    color: #2c3e50;
+                    font-size: 16px;
+                    line-height: 1.6;
+                  "
+                >
+                  Fill the Code below along with your new password. This code expires in
+                  <strong>1 hour</strong>.
+                </p>
+                <table
+                  role="presentation"
+                  cellspacing="0"
+                  cellpadding="0"
+                  border="0"
+                  width="100%"
+                  style="margin: 32px 0"
+                >
+                  <tr>
+                    <td align="center">
+                      <div
+                        style="
+                          display: inline-block;
+                          background-color: #d97757;
+                          color: #ffffff;
+                          text-decoration: none;
+                          padding: 14px 32px;
+                          border-radius: 8px;
+                          font-weight: 600;
+                          font-size: 16px;
+                        "
+                      > ${RESET_CODE}</div
+                    </td>
+                  </tr>
+                </table>
+               
+                <table
+                  role="presentation"
+                  cellspacing="0"
+                  cellpadding="0"
+                  border="0"
+                  width="100%"
+                  style="
+                    background-color: #fff5f1;
+                    border-left: 4px solid #d97757;
+                    border-radius: 4px;
+                    margin: 24px 0;
+                  "
+                >
+                  <tr>
+                    <td style="padding: 16px 20px">
+                      <p
+                        style="
+                          margin: 0;
+                          color: #d97757;
+                          font-size: 14px;
+                          font-weight: 600;
+                        "
+                      >
+                        ⚠️ Didn't request this?
+                      </p>
+                      <p
+                        style="
+                          margin: 8px 0 0 0;
+                          color: #2c3e50;
+                          font-size: 14px;
+                          line-height: 1.6;
+                        "
+                      >
+                        Ignore this email or contact support immediately. Your
+                        account is still secure.
+                      </p>
+                    </td>
+                  </tr>
+                </table>
+                <p
+                  style="
+                    margin: 24px 0 0 0;
+                    color: #64748b;
+                    font-size: 14px;
+                    line-height: 1.6;
+                  "
+                >
+                  Need help?
+                  <a
+                    href="mailto:entri@neurobytes.io"
+                    style="color: #d97757; text-decoration: none"
+                    >entri@neurobytes.io</a
+                  >
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td
+                style="
+                  background-color: #fafaf8;
+                  padding: 24px 32px;
+                  border-top: 1px solid #e2e8f0;
+                "
+              >
+                <p
+                  style="
+                    margin: 0 0 8px 0;
+                    color: #2c3e50;
+                    font-size: 16px;
+                    font-weight: 600;
+                  "
+                >
+                  Connect. Manage. Thrive.
+                </p>
+                <p style="margin: 0; color: #64748b; font-size: 13px">
+                  © 2025 Entri by Neurobytes. All rights reserved.
+                </p>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
   </body>
-</html>`;
+</html>
+`;
+
+export const subscriptionReminderTemplate = ({
+  FULL_NAME,
+  EXPIRY_DATE,
+  RENEWAL_URL,
+  ESTATE_NAME,
+  PLAN_NAME,
+  AMOUNT,
+  DAYS_REMAINING,
+}: {
+  FULL_NAME: string;
+  ESTATE_NAME: string;
+  DAYS_REMAINING: string;
+  PLAN_NAME: string;
+  EXPIRY_DATE: string;
+  AMOUNT: string;
+  RENEWAL_URL: string;
+}) => `<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body
+    style="
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+      font-family: 'Inter', Arial, sans-serif;
+    "
+  >
+    <table
+      role="presentation"
+      cellspacing="0"
+      cellpadding="0"
+      border="0"
+      width="100%"
+      style="background-color: #f5f5f5"
+    >
+      <tr>
+        <td style="padding: 40px 20px">
+          <table
+            role="presentation"
+            cellspacing="0"
+            cellpadding="0"
+            border="0"
+            width="600"
+            style="
+              margin: 0 auto;
+              background-color: #ffffff;
+              border-radius: 12px;
+              overflow: hidden;
+              box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            "
+          >
+            <tr>
+              <td
+                style="
+                  background: linear-gradient(135deg, #1e3a5f 0%, #d97757 100%);
+                  padding: 40px 32px;
+                  text-align: center;
+                "
+              >
+                <h1
+                  style="
+                    margin: 0;
+                    color: #ffffff;
+                    font-size: 28px;
+                    font-weight: 700;
+                  "
+                >
+                  Subscription Renewal
+                </h1>
+                <p
+                  style="
+                    margin: 8px 0 0 0;
+                    color: rgba(255, 255, 255, 0.9);
+                    font-size: 16px;
+                  "
+                >
+                  Keep your estate connected
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 40px 32px">
+                <p
+                  style="
+                    margin: 0 0 16px 0;
+                    color: #2c3e50;
+                    font-size: 16px;
+                    line-height: 1.6;
+                  "
+                >
+                  Hi <strong>${FULL_NAME}</strong>,
+                </p>
+                <p
+                  style="
+                    margin: 0 0 24px 0;
+                    color: #2c3e50;
+                    font-size: 16px;
+                    line-height: 1.6;
+                  "
+                >
+                  Your Entri subscription for
+                  <strong>${ESTATE_NAME}</strong> expires in
+                  <strong style="color: #d97757">${DAYS_REMAINING} days</strong
+                  >.
+                </p>
+                <table
+                  role="presentation"
+                  cellspacing="0"
+                  cellpadding="0"
+                  border="0"
+                  width="100%"
+                  style="
+                    background-color: #f5efe7;
+                    border-radius: 8px;
+                    margin: 24px 0;
+                  "
+                >
+                  <tr>
+                    <td style="padding: 24px">
+                      <h3
+                        style="
+                          margin: 0 0 16px 0;
+                          color: #1e3a5f;
+                          font-size: 16px;
+                          font-weight: 600;
+                        "
+                      >
+                        Subscription Details
+                      </h3>
+                      <table
+                        role="presentation"
+                        cellspacing="0"
+                        cellpadding="0"
+                        border="0"
+                        width="100%"
+                      >
+                        <tr>
+                          <td
+                            style="
+                              padding: 8px 0;
+                              color: #64748b;
+                              font-size: 14px;
+                            "
+                          >
+                            Estate:
+                          </td>
+                          <td
+                            style="
+                              padding: 8px 0;
+                              color: #2c3e50;
+                              font-size: 14px;
+                              font-weight: 600;
+                              text-align: right;
+                            "
+                          >
+                            ${ESTATE_NAME}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style="
+                              padding: 8px 0;
+                              color: #64748b;
+                              font-size: 14px;
+                            "
+                          >
+                            Current Plan:
+                          </td>
+                          <td
+                            style="
+                              padding: 8px 0;
+                              color: #2c3e50;
+                              font-size: 14px;
+                              font-weight: 600;
+                              text-align: right;
+                            "
+                          >
+                            ${PLAN_NAME}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style="
+                              padding: 8px 0;
+                              color: #64748b;
+                              font-size: 14px;
+                            "
+                          >
+                            Expires On:
+                          </td>
+                          <td
+                            style="
+                              padding: 8px 0;
+                              color: #d97757;
+                              font-size: 14px;
+                              font-weight: 600;
+                              text-align: right;
+                            "
+                          >
+                            ${EXPIRY_DATE}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style="
+                              padding: 8px 0;
+                              border-top: 1px solid #e2e8f0;
+                              color: #64748b;
+                              font-size: 14px;
+                              padding-top: 16px;
+                            "
+                          >
+                            Renewal Amount:
+                          </td>
+                          <td
+                            style="
+                              padding: 8px 0;
+                              border-top: 1px solid #e2e8f0;
+                              color: #2c3e50;
+                              font-size: 18px;
+                              font-weight: 700;
+                              text-align: right;
+                              padding-top: 16px;
+                            "
+                          >
+                            ${AMOUNT}
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+                <table
+                  role="presentation"
+                  cellspacing="0"
+                  cellpadding="0"
+                  border="0"
+                  width="100%"
+                  style="
+                    background-color: #eff6ff;
+                    border-radius: 8px;
+                    margin: 24px 0;
+                  "
+                >
+                  <tr>
+                    <td style="padding: 20px">
+                      <h3
+                        style="
+                          margin: 0 0 12px 0;
+                          color: #1e3a5f;
+                          font-size: 15px;
+                          font-weight: 600;
+                        "
+                      >
+                        Continue Enjoying:
+                      </h3>
+                      <ul
+                        style="
+                          margin: 0;
+                          padding-left: 20px;
+                          color: #2c3e50;
+                          font-size: 14px;
+                          line-height: 1.8;
+                        "
+                      >
+                        <li>Unlimited visitor access codes</li>
+                        <li>Automated payment collection</li>
+                        <li>Repair management</li>
+                        <li>Real-time analytics</li>
+                        <li>24/7 priority support</li>
+                      </ul>
+                    </td>
+                  </tr>
+                </table>
+                <table
+                  role="presentation"
+                  cellspacing="0"
+                  cellpadding="0"
+                  border="0"
+                  width="100%"
+                  style="margin: 32px 0"
+                >
+                  <tr>
+                    <td align="center">
+                      <a
+                        href="${RENEWAL_URL}"
+                        style="
+                          display: inline-block;
+                          background-color: #d97757;
+                          color: #ffffff;
+                          text-decoration: none;
+                          padding: 14px 32px;
+                          border-radius: 8px;
+                          font-weight: 600;
+                          font-size: 16px;
+                        "
+                        >Renew Subscription</a
+                      >
+                    </td>
+                  </tr>
+                </table>
+                <table
+                  role="presentation"
+                  cellspacing="0"
+                  cellpadding="0"
+                  border="0"
+                  width="100%"
+                  style="
+                    background-color: #fff5f1;
+                    border-left: 4px solid #d97757;
+                    border-radius: 4px;
+                    margin: 24px 0;
+                  "
+                >
+                  <tr>
+                    <td style="padding: 16px 20px">
+                      <p
+                        style="
+                          margin: 0;
+                          color: #d97757;
+                          font-size: 14px;
+                          font-weight: 600;
+                        "
+                      >
+                        ⏰ What Happens If I Don't Renew?
+                      </p>
+                      <p
+                        style="
+                          margin: 8px 0 0 0;
+                          color: #2c3e50;
+                          font-size: 14px;
+                          line-height: 1.6;
+                        "
+                      >
+                        After expiry, residents can't generate codes or make
+                        payments. Data preserved for 30 days.
+                      </p>
+                    </td>
+                  </tr>
+                </table>
+                <p
+                  style="
+                    margin: 24px 0 0 0;
+                    color: #64748b;
+                    font-size: 14px;
+                    line-height: 1.6;
+                  "
+                >
+                  Questions?
+                  <a
+                    href="mailto:entri@neurobytes.io"
+                    style="color: #d97757; text-decoration: none"
+                    >entri@neurobytes.io</a
+                  >
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td
+                style="
+                  background-color: #fafaf8;
+                  padding: 24px 32px;
+                  border-top: 1px solid #e2e8f0;
+                "
+              >
+                <p
+                  style="
+                    margin: 0 0 8px 0;
+                    color: #2c3e50;
+                    font-size: 16px;
+                    font-weight: 600;
+                  "
+                >
+                  Connect. Manage. Thrive.
+                </p>
+                <p style="margin: 0; color: #64748b; font-size: 13px">
+                  © 2025 Entri by Neurobytes. All rights reserved.
+                </p>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
+`;

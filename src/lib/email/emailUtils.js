@@ -1,5 +1,5 @@
 import nodemailer from "nodemailer";
-import { passwordResetTemplate, subscriptionReminderTemplate, tenantAdminTemplate } from "./emailTemplates";
+import { estateAdmin, passwordResetTemplate, residentUser, securityUser, subscriptionReminderTemplate, tenantAdminTemplate } from "./emailTemplates";
 
 // SMTP Configuration settings for Zoho Mail - TLS
 // Outgoing Server Settings:
@@ -31,7 +31,9 @@ export const sendEmail = async (
   data
 ) => {
   const templateMap = {
-    tenantAdminTemplate: tenantAdminTemplate,
+    estateAdmin: estateAdmin,
+    residentUser: residentUser,
+    securityUser: securityUser,
     passwordResetTemplate: passwordResetTemplate,
     subscriptionReminderTemplate: subscriptionReminderTemplate
   };

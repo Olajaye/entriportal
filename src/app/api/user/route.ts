@@ -31,7 +31,6 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Check if email already exists
     const existingEmail = await prisma.user.findFirst({
       where: { email: email },
     });
@@ -43,13 +42,12 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Check if estate exists
     const estate = await prisma.estate.findFirst({
       where: { id: estateId },
       select: {
         id: true,
         estateName: true,
-        estatePlan: true, // assumes estate has a "plan" field like "BASIC" or "MEDIUM"
+        estatePlan: true,
       },
     });
 
@@ -103,31 +101,23 @@ export async function POST(request: NextRequest) {
     });
 
     const data = {
-      name: newUser.name,
-      email: newUser.email,
-      estate: newUser.estate.estateName,
-      role:
-        newUser.userType === "RESIDENT"
-          ? "Resident"
-          : newUser.userType === "GUARD"
-          ? "Guard"
-          : "Estate Admin",
-      password: newUser.password,
-      link: `${baseUrl}/entri`,
+      FULL_NAME: newUser.name,
+      ESTATE_NAME: newUser.estate.estateName,
+      EMAIL_ADDRESS: newUser.email,
+      TEMP_PASSWORD: newUser.password,
+      LOGIN_URL: `${baseUrl}/entri`,
     };
 
     await sendEmail(
       newUser.email,
       "Welcome to Entri",
-      "tenantAdminTemplate",
+      newUser.userType === "RESIDENT" ? "residentUser" : "securityUser",
       data
     );
 
     return NextResponse.json(newUser, { status: 201 });
   } catch (error: any) {
     console.error("Error creating user:", error);
-
-    // Handle duplicate email or estate constraint
     if (error.code === "P2002") {
       return NextResponse.json(
         { error: "A user with this email or estate already exists." },

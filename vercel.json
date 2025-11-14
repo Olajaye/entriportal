@@ -1,8 +1,8 @@
 {
   "crons": [
     {
-      "path": "/api/job/subscription-reminder",
-      "schedule": "0 9 * * *"
+      "path": "/api/cron",
+      "schedule": "* * * * *"
     }
   ]
 }
